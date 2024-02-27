@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "888400441681",
+    "project_id": "shopex-4517a",
+    "storage_bucket": "shopex-4517a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:888400441681:android:280c879b38476c0d12a370",
+        "android_client_info": {
+          "package_name": "com.jignesh.shopex"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXLHFPlsBsoCKPUiOXassFXsQaApT5-t8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
