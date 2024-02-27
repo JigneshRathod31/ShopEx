@@ -11,6 +11,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- user login Activity -->
+
+    <string name="user_login_sk_txt">Shop Keeper</string>
+    <string name="user_login_cust_txt">Customer</string>
+    <string name="user_login_warn_txt">Are you customer / shop keeper?</string>
+
     <!-- customer account fragment -->
     <string name="frg_csm_acc_usr_name_hint">Username</string>
     <string name="frg_csm_acc_email_hint">Email</string>
