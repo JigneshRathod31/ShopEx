@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">ShopEx</string>
+    <string name="title_activity_shopkeeper">ShopkeeperActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_customer">CustomerActivity</string>
+    <string name="my_orders">My Orders</string>
+    <string name="account">Account</string>
+    <string name="store">Store</string>
 </resources>
