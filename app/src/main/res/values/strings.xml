@@ -10,4 +10,25 @@
     <string name="store">Store</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- customer account fragment -->
+    <string name="frg_csm_acc_usr_name_hint">Username</string>
+    <string name="frg_csm_acc_email_hint">Email</string>
+    <string name="frg_csm_acc_mob_hint">Mobile no</string>
+    <string name="frg_csm_acc_add_hint">Address</string>
+    <string name="frg_csm_acc_save_btn">Save</string>
+
+    <!-- shopkeeper account fragment -->
+    <string name="frg_skp_acc_shop_name_hint">Shop name</string>
+    <string name="frg_skp_acc_shop_owner_name_hint">Shop owner</string>
+    <string name="frg_skp_acc_usr_name_hint">Username</string>
+    <string name="frg_skp_acc_email_hint">Email</string>
+    <string name="frg_skp_acc_mob_hint">Mobile no</string>
+    <string name="frg_skp_acc_add_hint">Address</string>
+    <string name="frg_skp_acc_ctg_hint">Category</string>
+    <string name="frg_skp_acc_open_time_hint">Open time</string>
+    <string name="frg_skp_acc_close_time_hint">Close time</string>
+    <string name="frg_skp_acc_open_time">9:00 AM</string>
+    <string name="frg_skp_acc_close_time">9:00 PM</string>
+    <string name="frg_skp_acc_save_btn">Save</string>
 </resources>

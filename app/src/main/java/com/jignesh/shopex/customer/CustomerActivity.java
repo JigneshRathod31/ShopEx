@@ -18,6 +18,7 @@ import com.jignesh.shopex.R;
 import com.jignesh.shopex.customer.ui.CustomerAccountFragment;
 import com.jignesh.shopex.customer.ui.CustomerHomeFragment;
 import com.jignesh.shopex.customer.ui.CustomerMyOrdersFragment;
+import com.jignesh.shopex.shopkeeper.ui.ShopkeeperAccountFragment;
 
 public class CustomerActivity extends AppCompatActivity {
 
@@ -45,7 +46,8 @@ public class CustomerActivity extends AppCompatActivity {
                             replaceFragment(new CustomerMyOrdersFragment());
                             break;
                         case R.id.c_account:
-                            replaceFragment(new CustomerAccountFragment());
+/**                         temporary customer account fragment replaced with shopkeeper **/
+                            replaceFragment(new ShopkeeperAccountFragment());
                             break;
                     }
                     return true;
