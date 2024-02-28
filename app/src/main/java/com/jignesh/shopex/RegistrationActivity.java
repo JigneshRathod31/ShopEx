@@ -1,11 +1,14 @@
 package com.jignesh.shopex;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -15,6 +18,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,17 +56,21 @@ public class RegistrationActivity extends AppCompatActivity {
 
         btnRegister = findViewById(R.id.btn_register);
         tvLoginHere = findViewById(R.id.tv_login_here);
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if(!locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
+            turnOnLocation();
 
         btnRegister.setOnClickListener(View -> {
             flag = getPermission();
             Toast.makeText(this, flag + "\n" + CITY, Toast.LENGTH_SHORT).show();
-            locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
             if (flag) {
                 if (ActivityCompat.checkSelfPermission(this,PERMISSIONS[0]) != PG
                         && ActivityCompat.checkSelfPermission(this, PERMISSIONS[1]) != PG)
                     ActivityCompat.requestPermissions(this,PERMISSIONS,REQ_CODE);
                 locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 15000, 0, locationListener);
-                if(CITY != null) {
+                if(CITY != null && flag) {
                     Log.d("CITY",CITY);
                     startActivity(new Intent(RegistrationActivity.this, userLogin.class));
                 }
@@ -91,6 +99,27 @@ public class RegistrationActivity extends AppCompatActivity {
             if(grantResults.length > 0)
                 if(grantResults[0] == PG && grantResults[1] == PG)
                     Toast.makeText(this, "Location permission allowed", Toast.LENGTH_SHORT).show();
+    }
+
+    private void turnOnLocation(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        flag = false;
+                        dialog.cancel();
+                    }
+                })
+                .create()
+                .show();
     }
 
  /***
