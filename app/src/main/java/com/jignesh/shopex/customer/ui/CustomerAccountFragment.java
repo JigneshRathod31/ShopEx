@@ -15,6 +15,7 @@ import com.jignesh.shopex.R;
  * Use the {@link CustomerAccountFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
 public class CustomerAccountFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match

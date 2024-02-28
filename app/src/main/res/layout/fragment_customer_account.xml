@@ -5,10 +5,70 @@
     android:layout_height="match_parent"
     tools:context=".customer.ui.CustomerAccountFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="AccountFragment" />
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/frg_csm_acc_img_name_wrapperLYT"
+            android:layout_width="match_parent"
+            android:layout_height="225dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="25dp"
+            android:background="@drawable/frg_acc_btm_crnr_rds_bg">
+
+            <TextView
+                android:id="@+id/frg_csm_acc_greet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:textSize="20sp"
+                android:text="Hello"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/frg_csm_acc_greet"
+                android:layout_alignStart="@id/frg_csm_acc_greet"
+                android:layout_marginTop="15dp"
+                android:text="Sujju"
+                android:textSize="20sp"
+                android:textColor="@color/white"/>
+
+            <ImageView
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:padding="10dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/frg_acc_img_bg"
+                android:src="@drawable/ic_user" />
+
+        </RelativeLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/frg_csm_acc_tabLYT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/frg_csm_acc_img_name_wrapperLYT"
+            android:layout_below="@id/frg_csm_acc_img_name_wrapperLYT"
+            android:layout_centerHorizontal="true">
+
+        </android.support.design.widget.TabLayout>
+
+        <android.support.v4.view.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/frg_csm_acc_tabLYT"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true">
+
+        </android.support.v4.view.ViewPager>
+
+    </RelativeLayout>
 
 </FrameLayout>
