@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Shop Name"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/black" />
 
@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Open: Mon-Fri"
-                android:textColor="#05c46b"
+                android:textColor="@color/green_color"
                 android:textStyle="bold" />
 
             <TextView
@@ -57,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="743 Meera Kutir, Someshwar Society, Sector 27, Gandhinagar"
-                android:textSize="18sp" />
+                android:textSize="17sp" />
 
         </LinearLayout>
 
@@ -71,12 +71,13 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_centerHorizontal="true"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@drawable/ic_launcher_foreground" />
 
             <ImageView
                 android:id="@+id/iv_mobile"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_below="@+id/iv_shop_logo"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/ic_baseline_phone_24" />

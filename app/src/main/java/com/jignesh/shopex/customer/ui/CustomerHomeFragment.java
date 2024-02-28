@@ -15,8 +15,10 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.jignesh.shopex.R;
 import com.jignesh.shopex.adapters.CustomerStoreAdapter;
@@ -26,17 +28,18 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class CustomerHomeFragment extends Fragment {
 
     RecyclerView rvShopkeeperStores;
     CustomerStoreAdapter customerStoreAdapter;
-    ArrayList<CustomerStoreModel> alCustomerStoreModel = new ArrayList<>();
+    ArrayList<CustomerStoreModel> alCustomerStoreModel;
 
     // Firebase Objects
-
     FirebaseApp firebaseApp;
     FirebaseFirestore db;
+    DocumentReference docRef;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -90,14 +93,24 @@ public class CustomerHomeFragment extends Fragment {
         try {
             FirebaseApp.initializeApp(getContext());
             db = FirebaseFirestore.getInstance();
+//            docRef = db.collection("gnr");
+
             rvShopkeeperStores = root.findViewById(R.id.rv_shopkeeper_stores);
 
+            alCustomerStoreModel = new ArrayList<>();
+            alCustomerStoreModel.add(new CustomerStoreModel("Everyday", "Near GH-6, Gandhinagar", "Food Shop", "pnp@gmail.com", "9106258146", "Patnagar Panipuri", "Shailesh Rana", "shopLogo"));
+            alCustomerStoreModel.add(new CustomerStoreModel("Everyday", "Near GH-6, Gandhinagar", "Food Shop", "pnp@gmail.com", "9106258146", "Shiv Multi Service", "Shailesh Rana", "shopLogo"));
+//            alCustomerStoreModel.add(new CustomerStoreModel("Everyday", "Near GH-6, Gandhinagar", "Food Shop", "pnp@gmail.com", "9106258146", "KK Cyber Cafe", "Shailesh Rana", "shopLogo"));
+//            alCustomerStoreModel.add(new CustomerStoreModel("Everyday", "Near GH-6, Gandhinagar", "Food Shop", "pnp@gmail.com", "9106258146", "Radhe Sweets", "Shailesh Rana", "shopLogo"));
             rvShopkeeperStores.setLayoutManager(new LinearLayoutManager(getContext()));
             customerStoreAdapter = new CustomerStoreAdapter(alCustomerStoreModel, getContext());
             rvShopkeeperStores.setAdapter(customerStoreAdapter);
 
+//            storeSomeDummyDataOnFirebase();
+            retrieveDataFromFirebase();
+
         } catch (Exception e) {
-            Log.d("shuThayu", e.toString());
+            Log.d("error", e.toString());
             Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
         }
 
@@ -105,55 +118,140 @@ public class CustomerHomeFragment extends Fragment {
     }
 
     void retrieveDataFromFirebase(){
-        db.collection("gnr").document("pnp").collection("Details").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()){
-                    for (DocumentSnapshot document : task.getResult()) {
-                        CustomerStoreModel customerStoreModel = new CustomerStoreModel();
+        try {
 
-                        customerStoreModel.setShopName(document.get("shop_name").toString());
-                        customerStoreModel.setShopOwner(document.get("shop_owner").toString());
-                        customerStoreModel.setActiveDays(document.get("active_days").toString());
-                        customerStoreModel.setAddress(document.get("address").toString());
-                        customerStoreModel.setShopLogo(document.get("shop_logo").toString());
-                        customerStoreModel.setMobile(document.get("mobile").toString());
-                        customerStoreModel.setEmail(document.get("email").toString());
+//            db.collection("gnr")
+//                    .get()
+//                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                        @Override
+//                        public void onComplete(@androidx.annotation.NonNull Task<QuerySnapshot> task) {
+//                            try {
+//                                if (task.isSuccessful()){
+//                                    for (DocumentSnapshot document: task.getResult()){
+//                                        CustomerStoreModel customerStoreModel = new CustomerStoreModel();
+//
+//                                        customerStoreModel.setShopName(document.get("shop_name").toString());
+//                                        customerStoreModel.setShopOwner(document.get("shop_owner").toString());
+//                                        customerStoreModel.setActiveDays(document.get("active_days").toString());
+//                                        customerStoreModel.setAddress(document.get("address").toString());
+//                                        customerStoreModel.setShopLogo(document.get("shop_logo").toString());
+//                                        customerStoreModel.setMobile(document.get("mobile").toString());
+//                                        customerStoreModel.setEmail(document.get("email").toString());
+//
+//                                        alCustomerStoreModel.add(customerStoreModel);
+//                                        customerStoreAdapter.notifyDataSetChanged();
+//                                    }
+//                                }else{
+//                                    Log.d("error", "Task Failed to retrieve data");
+//                                    Toast.makeText(getContext(), task.getException().toString(), Toast.LENGTH_SHORT).show();
+//                                }
+//        } catch (Exception e) {
+//            Log.d("error", e.toString());
+//            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+//        }
+//        }
+//    });
+            DocumentReference documentReference = db.collection("gnr").document("pnp").collection("Details").document("details_doc");
+//            DocumentReference docRef1 = db.collection("gnr").document();
 
-                        alCustomerStoreModel.add(customerStoreModel);
-                    }
-                }
-            }
-        });
+//            documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                @Override
+//                public void onComplete(@androidx.annotation.NonNull Task<DocumentSnapshot> task) {
+//                    if (task.isSuccessful()){
+//                        DocumentSnapshot document = task.getResult();
+//                        Toast.makeText(getContext(), document.get("shop_owner").toString(), Toast.LENGTH_SHORT).show();
+//                    }else {
+//                        Toast.makeText(getContext(), task.getException().toString(), Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            });
 
-        customerStoreAdapter.notifyDataSetChanged();
-    }
-
-    void storeSomeDummyDataOnFirebase(){
-        for (int i=0; i<10; i++){
-            HashMap<String, String> storeDetails = new HashMap<>();
-            storeDetails.put("shop_name", "pnp");
-            storeDetails.put("shop_owner", "Shailesh Rana");
-            storeDetails.put("shop_logo", "Coming Soon");
-            storeDetails.put("category", "Food Shop");
-            storeDetails.put("email", "shaileshrana@gmail.com");
-            storeDetails.put("mobile", "1234567890");
-            storeDetails.put("active_days", "Everyday");
-            storeDetails.put("address", "Near GH-6, Gandhinagar");
-
-            db.collection("gnr").document("pnp")
-                    .collection("Details").document("details_doc")
-                    .set(storeDetails)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+            db.collection("gnr")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
-                        public void onComplete(@NonNull Task<Void> task) {
+                        public void onComplete(@androidx.annotation.NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()){
-                                Log.d("store", "Data stored successfully");
-                            }else {
-                                Log.d("store", task.getException().toString());
+                                for (QueryDocumentSnapshot document : task.getResult()){
+                                    String shop = document.getId();
+                                    db.collection("gnr")
+                                            .document(shop)
+                                            .collection("Details")
+                                            .document("details_doc")
+                                            .get()
+                                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                @Override
+                                                public void onComplete(@androidx.annotation.NonNull Task<DocumentSnapshot> task) {
+                                                    if (task.isSuccessful()){
+                                                        DocumentSnapshot document = task.getResult();
+
+                                                        if (document.exists()){
+                                                            Map<String, Object> shopDetails = document.getData();
+                                                            CustomerStoreModel customerStoreModel = new CustomerStoreModel();
+
+                                                            customerStoreModel.setShopName(shopDetails.get("shop_name").toString());
+                                                            customerStoreModel.setShopOwner(shopDetails.get("shop_owner").toString());
+                                                            customerStoreModel.setCategory(shopDetails.get("category").toString());
+                                                            customerStoreModel.setActiveDays(shopDetails.get("active_days").toString());
+                                                            customerStoreModel.setAddress(shopDetails.get("address").toString());
+                                                            customerStoreModel.setShopLogo(shopDetails.get("shop_logo").toString());
+                                                            customerStoreModel.setMobile(shopDetails.get("mobile").toString());
+                                                            customerStoreModel.setEmail(shopDetails.get("email").toString());
+
+                                                            alCustomerStoreModel.add(customerStoreModel);
+                                                            customerStoreAdapter.notifyDataSetChanged();
+                                                        }else {
+                                                            Log.d("error", "Esa koi document nahi hai bhai...");
+                                                        }
+                                                    }
+                                                }
+                                            });
+                                }
+                            }else{
+                                Toast.makeText(getContext(), task.getException().toString(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
+        } catch (Exception e) {
+            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+            Log.d("error", e.toString());
         }
+
+//        customerStoreAdapter = new CustomerStoreAdapter(alCustomerStoreModel, getContext());
+//        rvShopkeeperStores.setAdapter(customerStoreAdapter);
+
+    }
+
+    void storeSomeDummyDataOnFirebase(){
+        try {
+            for (int i=0; i<10; i++){
+                HashMap<String, String> storeDetails = new HashMap<>();
+                storeDetails.put("shop_name", "pnp");
+                storeDetails.put("shop_owner", "Shailesh Rana");
+                storeDetails.put("shop_logo", "Coming Soon");
+                storeDetails.put("category", "Food Shop");
+                storeDetails.put("email", "shaileshrana@gmail.com");
+                storeDetails.put("mobile", "1234567890");
+                storeDetails.put("active_days", "sdkfhkh");
+                storeDetails.put("address", "Near GH-6, Gandhinagar");
+
+                db.collection("gnr").document("pnp0")
+                        .collection("Details").document("details_doc")
+                        .set(storeDetails)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    Log.d("store", "Data stored successfully");
+                                }else {
+                                    Log.d("error", task.getException().toString());
+                                }
+                            }
+                        });
+            }
+        } catch (Exception e) {
+            Log.d("error", e.toString());
+        }
+
     }
 }
