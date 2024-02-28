@@ -1,4 +1,4 @@
-package com.jignesh.shopex;
+package com.jignesh.shopex.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,6 +12,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.jignesh.shopex.models.CustomerStoreModel;
+import com.jignesh.shopex.R;
 
 import java.util.ArrayList;
 
@@ -35,18 +38,18 @@ public class CustomerStoreAdapter extends RecyclerView.Adapter<CustomerStoreAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.tvShopName.setText(alCustomerStoreModel.get(position).shop_name);
-        holder.tvShopCategory.setText(alCustomerStoreModel.get(position).category);
-        holder.tvActiveTime.setText(alCustomerStoreModel.get(position).active_days);
-        holder.tvAddress.setText(alCustomerStoreModel.get(position).address);
+        holder.tvShopName.setText(alCustomerStoreModel.get(position).getShopName());
+        holder.tvShopCategory.setText(alCustomerStoreModel.get(position).getCategory());
+        holder.tvActiveDays.setText(alCustomerStoreModel.get(position).getActiveDays());
+        holder.tvAddress.setText(alCustomerStoreModel.get(position).getAddress());
         holder.ivShopLogo.setImageResource(R.drawable.ic_launcher_background);
 
         holder.ivMobile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:"+alCustomerStoreModel.get(position).mobile));
-//                startActivity(callIntent);
+                callIntent.setData(Uri.parse("tel:"+alCustomerStoreModel.get(position).getMobile()));
+                context.startActivity(callIntent);
             }
         });
     }
@@ -58,7 +61,7 @@ public class CustomerStoreAdapter extends RecyclerView.Adapter<CustomerStoreAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvShopName, tvShopCategory, tvActiveTime, tvAddress;
+        TextView tvShopName, tvShopCategory, tvActiveDays, tvAddress;
         ImageView ivShopLogo, ivMobile;
 
         public ViewHolder(@NonNull View itemView) {
@@ -66,7 +69,7 @@ public class CustomerStoreAdapter extends RecyclerView.Adapter<CustomerStoreAdap
 
             tvShopName = itemView.findViewById(R.id.tv_shop_name);
             tvShopCategory = itemView.findViewById(R.id.tv_shop_category);
-            tvActiveTime = itemView.findViewById(R.id.tv_active_time);
+            tvActiveDays = itemView.findViewById(R.id.tv_active_days);
             tvAddress = itemView.findViewById(R.id.tv_address);
             ivShopLogo = itemView.findViewById(R.id.iv_shop_logo);
             ivMobile = itemView.findViewById(R.id.iv_mobile);

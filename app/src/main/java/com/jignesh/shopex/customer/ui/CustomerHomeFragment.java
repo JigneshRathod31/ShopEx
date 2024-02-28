@@ -3,22 +3,41 @@ package com.jignesh.shopex.customer.ui;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.jignesh.shopex.R;
+import com.jignesh.shopex.adapters.CustomerStoreAdapter;
+import com.jignesh.shopex.models.CustomerStoreModel;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CustomerHomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class CustomerHomeFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    RecyclerView rvShopkeeperStores;
+    CustomerStoreAdapter customerStoreAdapter;
+    ArrayList<CustomerStoreModel> alCustomerStoreModel = new ArrayList<>();
+
+    // Firebase Objects
+
+    FirebaseApp firebaseApp;
+    FirebaseFirestore db;
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -58,9 +77,83 @@ public class CustomerHomeFragment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        firebaseApp = FirebaseApp.initializeApp(getContext());
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_customer_home, container, false);
+        View root = inflater.inflate(R.layout.fragment_customer_home, container, false);
+
+        try {
+            FirebaseApp.initializeApp(getContext());
+            db = FirebaseFirestore.getInstance();
+            rvShopkeeperStores = root.findViewById(R.id.rv_shopkeeper_stores);
+
+            rvShopkeeperStores.setLayoutManager(new LinearLayoutManager(getContext()));
+            customerStoreAdapter = new CustomerStoreAdapter(alCustomerStoreModel, getContext());
+            rvShopkeeperStores.setAdapter(customerStoreAdapter);
+
+        } catch (Exception e) {
+            Log.d("shuThayu", e.toString());
+            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+        }
+
+        return root;
+    }
+
+    void retrieveDataFromFirebase(){
+        db.collection("gnr").document("pnp").collection("Details").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (DocumentSnapshot document : task.getResult()) {
+                        CustomerStoreModel customerStoreModel = new CustomerStoreModel();
+
+                        customerStoreModel.setShopName(document.get("shop_name").toString());
+                        customerStoreModel.setShopOwner(document.get("shop_owner").toString());
+                        customerStoreModel.setActiveDays(document.get("active_days").toString());
+                        customerStoreModel.setAddress(document.get("address").toString());
+                        customerStoreModel.setShopLogo(document.get("shop_logo").toString());
+                        customerStoreModel.setMobile(document.get("mobile").toString());
+                        customerStoreModel.setEmail(document.get("email").toString());
+
+                        alCustomerStoreModel.add(customerStoreModel);
+                    }
+                }
+            }
+        });
+
+        customerStoreAdapter.notifyDataSetChanged();
+    }
+
+    void storeSomeDummyDataOnFirebase(){
+        for (int i=0; i<10; i++){
+            HashMap<String, String> storeDetails = new HashMap<>();
+            storeDetails.put("shop_name", "pnp");
+            storeDetails.put("shop_owner", "Shailesh Rana");
+            storeDetails.put("shop_logo", "Coming Soon");
+            storeDetails.put("category", "Food Shop");
+            storeDetails.put("email", "shaileshrana@gmail.com");
+            storeDetails.put("mobile", "1234567890");
+            storeDetails.put("active_days", "Everyday");
+            storeDetails.put("address", "Near GH-6, Gandhinagar");
+
+            db.collection("gnr").document("pnp")
+                    .collection("Details").document("details_doc")
+                    .set(storeDetails)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()){
+                                Log.d("store", "Data stored successfully");
+                            }else {
+                                Log.d("store", task.getException().toString());
+                            }
+                        }
+                    });
+        }
     }
 }

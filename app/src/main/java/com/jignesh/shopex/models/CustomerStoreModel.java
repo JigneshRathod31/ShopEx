@@ -1,14 +1,14 @@
-package com.jignesh.shopex;
+package com.jignesh.shopex.models;
 
 public class CustomerStoreModel {
-    String active_days;
-    String address;
-    String category;
-    String email;
-    String mobile;
-    String shop_name;
-    String shop_owner;
-    String shop_logo;
+    public String active_days;
+    public String address;
+    public String category;
+    public String email;
+    public String mobile;
+    public String shop_name;
+    public String shop_owner;
+    public String shop_logo;
 
     public CustomerStoreModel(){}
 
