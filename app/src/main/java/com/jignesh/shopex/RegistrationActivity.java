@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.jignesh.shopex.customer.CustomerActivity;
+import com.jignesh.shopex.shopkeeper.ShopkeeperActivity;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -23,6 +25,8 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
 
         tvLoginHere = findViewById(R.id.tv_login_here);
+
+        startActivity(new Intent(RegistrationActivity.this, ShopkeeperActivity.class));
 
         tvLoginHere.setOnClickListener(new View.OnClickListener() {
             @Override

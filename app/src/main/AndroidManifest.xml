@@ -13,20 +13,18 @@
         android:theme="@style/Theme.ShopEx"
         tools:targetApi="31">
         <activity
-            android:name=".customer.CustomerActivity"
-            android:exported="false"
-            android:label="@string/title_activity_customer">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".shopkeeper.ShopkeeperActivity"
-            android:exported="true"
-            android:label="@string/title_activity_shopkeeper">
+            android:exported="false" />
+        <activity
+            android:name=".customer.CustomerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegistrationActivity"
+            android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,16 +32,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RegistrationActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".LoginActivity"
             android:exported="false">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
