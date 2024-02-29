@@ -4,14 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="8dp"
+    android:orientation="vertical"
     android:background="@color/light_bg_color"
-    tools:context=".customer.ui.CustomerHomeFragment">
+    tools:context=".customer.ui.ShoppingCartFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_shopkeeper_stores"
+        android:id="@+id/rv_cart_products"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_buy_now"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Buy Now"
+        android:textStyle="bold" />
 
 </LinearLayout>

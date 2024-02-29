@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +14,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.jignesh.shopex.ProductsFragment;
 import com.jignesh.shopex.models.CustomerStoreModel;
 import com.jignesh.shopex.R;
 
@@ -50,9 +57,22 @@ public class CustomerStoreAdapter extends RecyclerView.Adapter<CustomerStoreAdap
             holder.tvAddress.setText(alCustomerStoreModel.get(position).getAddress());
             holder.ivShopLogo.setImageResource(R.drawable.ic_launcher_foreground);
 
-//            Toast.makeText(context, "in bind viewholder", Toast.LENGTH_SHORT).show();
-
             holder.ivMobile.setImageResource(R.drawable.ic_baseline_phone_24);
+
+            holder.cvStoreItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Fragment productFragment = new ProductsFragment();
+                    Bundle args = new Bundle();
+                    args.putString("shopName", alCustomerStoreModel.get(position).getShopName());
+                    productFragment.setArguments(args);
+
+                    FragmentManager fm = ((FragmentActivity) view.getContext()).getSupportFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.replace(R.id.c_frameLayout, productFragment);
+                    ft.commit();
+                }
+            });
 
             holder.ivMobile.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -79,12 +99,14 @@ public class CustomerStoreAdapter extends RecyclerView.Adapter<CustomerStoreAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        CardView cvStoreItem;
         TextView tvShopName, tvShopCategory, tvActiveDays, tvAddress;
         ImageView ivShopLogo, ivMobile;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            cvStoreItem = itemView.findViewById(R.id.cv_store_item);
             tvShopName = itemView.findViewById(R.id.tv_shop_name);
             tvShopCategory = itemView.findViewById(R.id.tv_shop_category);
             tvActiveDays = itemView.findViewById(R.id.tv_active_days);

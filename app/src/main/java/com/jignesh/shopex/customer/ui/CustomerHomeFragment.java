@@ -102,13 +102,13 @@ public class CustomerHomeFragment extends Fragment {
             customerStoreAdapter = new CustomerStoreAdapter(alCustomerStoreModel, getContext());
             rvShopkeeperStores.setAdapter(customerStoreAdapter);
 
-            addStoreDetailsOnFirebase();
+//            addStoreDetailsOnFirebase();
 
             retrieveStoreDataFromFirebase();
 
         } catch (Exception e) {
             Log.d("error", e.toString());
-            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
         }
 
         return root;
@@ -127,13 +127,14 @@ public class CustomerHomeFragment extends Fragment {
 
                                 fetchStoreDetails(documents, 0);
                             }else{
-                                Toast.makeText(getContext(), task.getException().toString(), Toast.LENGTH_SHORT).show();
+                                Log.d("error", task.getException().toString());
+//                                Toast.makeText(getContext(), task.getException().toString(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
 
         } catch (Exception e) {
-            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
             Log.d("error", e.toString());
         }
 
@@ -142,7 +143,11 @@ public class CustomerHomeFragment extends Fragment {
     void fetchStoreDetails(List<DocumentSnapshot> documents, int i){
         if (i < documents.size()){
             DocumentSnapshot document = documents.get(i);
-            String shop = document.getId();
+            String shop = document.getId().trim();
+
+            if (shop.equals("customer$")){
+                fetchStoreDetails(documents, i+1);
+            }
 
             db.collection("gnr")
                     .document(shop)
