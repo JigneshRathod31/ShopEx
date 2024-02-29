@@ -13,4 +13,4 @@
 .externalNativeBuild
 .cxx
 local.properties
-/src/main/AndroidManifest.xml
+/src/main/.AndroidManifest.xml
