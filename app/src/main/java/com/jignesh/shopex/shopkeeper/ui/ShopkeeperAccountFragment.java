@@ -7,7 +7,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.jignesh.shopex.R;
 
 /**
@@ -61,6 +64,23 @@ public class ShopkeeperAccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shopkeeper_account, container, false);
+        View accFragment = inflater.inflate(R.layout.fragment_shopkeeper_account, container, false);
+
+        int[] textInputLayoutIds = {R.id.frg_skp_acc_shop_name, R.id.frg_skp_acc_shop_owner,
+                R.id.frg_skp_acc_shop_email, R.id.frg_skp_acc_shop_mob,
+                R.id.frg_skp_acc_shop_add, R.id.frg_skp_acc_shop_category};
+
+        TextInputLayout[] textInputLayouts = new TextInputLayout[textInputLayoutIds.length];
+
+        int i, length = textInputLayoutIds.length;
+        for(i = 0; i < length; i++)
+            textInputLayouts[i] = accFragment.findViewById(textInputLayoutIds[i]);
+
+        Button frgSkpSaveBtn = accFragment.findViewById(R.id.frg_skp_acc_save_btn);
+        frgSkpSaveBtn.setOnClickListener(View -> {
+            Toast.makeText(accFragment.getContext(), "DAbayu", Toast.LENGTH_SHORT).show();
+        });
+
+        return accFragment;
     }
 }
