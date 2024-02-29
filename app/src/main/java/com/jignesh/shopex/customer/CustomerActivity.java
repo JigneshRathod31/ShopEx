@@ -8,7 +8,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -16,6 +18,7 @@ import com.jignesh.shopex.R;
 import com.jignesh.shopex.customer.ui.CustomerAccountFragment;
 import com.jignesh.shopex.customer.ui.CustomerHomeFragment;
 import com.jignesh.shopex.customer.ui.CustomerMyOrdersFragment;
+import com.jignesh.shopex.shopkeeper.ui.ShopkeeperAccountFragment;
 
 public class CustomerActivity extends AppCompatActivity {
 
@@ -26,28 +29,34 @@ public class CustomerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer);
 
-        customerBNV = findViewById(R.id.customer_bottomNavigationView);
-        replaceFragment(new CustomerHomeFragment());
+        try {
+            customerBNV = findViewById(R.id.customer_bottomNavigationView);
+            replaceFragment(new CustomerHomeFragment());
 
-        customerBNV.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @SuppressLint("NonConstantResourceId")
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            customerBNV.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+                @SuppressLint("NonConstantResourceId")
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                switch (item.getItemId()){
-                    case R.id.c_home:
-                        replaceFragment(new CustomerHomeFragment());
-                        break;
-                    case R.id.c_my_orders:
-                        replaceFragment(new CustomerMyOrdersFragment());
-                        break;
-                    case R.id.c_account:
-                        replaceFragment(new CustomerAccountFragment());
-                        break;
+                    switch (item.getItemId()){
+                        case R.id.c_home:
+                            replaceFragment(new CustomerHomeFragment());
+                            break;
+                        case R.id.c_my_orders:
+                            replaceFragment(new CustomerMyOrdersFragment());
+                            break;
+                        case R.id.c_account:
+/**                         temporary customer account fragment replaced with shopkeeper **/
+                            replaceFragment(new ShopkeeperAccountFragment());
+                            break;
+                    }
+                    return true;
                 }
-                return true;
-            }
-        });
+            });
+        } catch (Exception e) {
+            Log.d("bata", e.toString());
+            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+        }
 
     }
 
