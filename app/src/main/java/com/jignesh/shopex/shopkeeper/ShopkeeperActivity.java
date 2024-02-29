@@ -32,8 +32,6 @@ public class ShopkeeperActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopkeeper);
 
-        SendNotification.sendNotification(ShopkeeperActivity.this, "Title", "Content", new Intent(this, LoginActivity.class));
-
         shopkeeperBNV = findViewById(R.id.shopkeeper_bottomNavigationView);
         replaceFragment(new ShopkeeperDashboardFragment());
 

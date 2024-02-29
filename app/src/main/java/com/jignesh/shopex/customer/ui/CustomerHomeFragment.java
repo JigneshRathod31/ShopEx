@@ -28,6 +28,7 @@ import com.jignesh.shopex.ImageChooser;
 import com.jignesh.shopex.R;
 import com.jignesh.shopex.adapters.CustomerStoreAdapter;
 import com.jignesh.shopex.models.CustomerStoreModel;
+import com.jignesh.shopex.shopkeeper.ShopkeeperActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -108,12 +109,9 @@ public class CustomerHomeFragment extends Fragment {
 
             retrieveStoreDataFromFirebase();
 
-            //HR
-            startActivity(new Intent(getContext(), ImageChooser.class));
-
         } catch (Exception e) {
             Log.d("error", e.toString());
-            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
         }
 
         return root;
@@ -132,13 +130,13 @@ public class CustomerHomeFragment extends Fragment {
 
                                 fetchStoreDetails(documents, 0);
                             }else{
-                                Toast.makeText(getContext(), task.getException().toString(), Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getContext(), task.getException().toString(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
 
         } catch (Exception e) {
-            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
             Log.d("error", e.toString());
         }
 

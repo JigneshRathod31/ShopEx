@@ -55,7 +55,7 @@ public class CustomerActivity extends AppCompatActivity {
             });
         } catch (Exception e) {
             Log.d("bata", e.toString());
-            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
         }
 
     }
