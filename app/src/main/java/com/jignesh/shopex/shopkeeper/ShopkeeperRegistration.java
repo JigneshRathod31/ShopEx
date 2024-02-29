@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jignesh.shopex.R;
 
+import org.jetbrains.annotations.NotNull;
+
 public class ShopkeeperRegistration extends AppCompatActivity {
     int[] editTextIds = {R.id.skp_reg_usr_name_et,R.id.skp_reg_email_et,
             R.id.skp_reg_mob_et,R.id.skp_reg_add_et,
@@ -36,7 +38,9 @@ public class ShopkeeperRegistration extends AppCompatActivity {
         /** Register Button **/
         skpRegBtn.setOnClickListener(View ->{
             String[] data = getData();
-
+            if(!data[data.length - 1].equals("")){
+                /** Write Code here (JK) **/
+            }
         });
 
         skpLgnTv.setOnClickListener(View -> {
@@ -61,7 +65,11 @@ public class ShopkeeperRegistration extends AppCompatActivity {
             data[i++] = singleET.getText().toString();
 
         data[i++] = skpRegCtg.getEditText().getText().toString();
-        data[i] = ((RadioButton) findViewById(skpRadioGroup.getCheckedRadioButtonId())).getText().toString();
+        int selectedId = skpRadioGroup.getCheckedRadioButtonId();
+        if(selectedId == R.id.rb1 || selectedId == R.id.rb2 || selectedId == R.id.rb3)
+            data[i] = ((RadioButton) findViewById(selectedId)).getText().toString();
+        else
+            data[i] = "";
 
         return data;
     }
