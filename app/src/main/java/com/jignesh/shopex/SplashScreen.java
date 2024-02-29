@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.jignesh.shopex.shopkeeper.ShopkeeperActivity;
+import com.jignesh.shopex.utils.GenerateInvoicePDF;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -31,6 +32,7 @@ public class SplashScreen extends AppCompatActivity {
             public void onAnimationStart(Animation animation) {}
             @Override
             public void onAnimationEnd(Animation animation) {
+//                GenerateInvoicePDF.generateInvoicePDF(getApplicationContext());
                 startActivity(new Intent(SplashScreen.this, ShopkeeperActivity.class));
                 finish();
             }
