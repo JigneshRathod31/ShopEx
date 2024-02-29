@@ -1,41 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_horizontal"
     tools:context=".userLogin">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_anim"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="10dp"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/user_profile_selection"/>
+
     <TextView
+        android:id="@+id/profileSelection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/innerLYT"
-        android:layout_marginBottom="15dp"
+        android:layout_below="@id/lottie_anim"
+        android:layout_alignStart="@id/innerLYT"
         android:text="@string/user_login_warn_txt"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textColor="@color/main_color"/>
 
     <LinearLayout
         android:id="@+id/innerLYT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/ul_login_btn_wrapper">
+        android:layout_below="@id/profileSelection"
+        android:layout_alignStart="@id/lottie_anim"
+        android:layout_alignEnd="@id/lottie_anim"
+        android:layout_marginEnd="0dp"
+        android:layout_marginTop="25dp"
+        android:background="@color/transparent">
 
         <Button
             android:id="@+id/UL_shopKeeperLGNBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/ul_login_btn_wrapper"
             android:text="@string/user_login_sk_txt"
-            android:background="@drawable/toggle_bg_user_login"/>
+            android:textColor="@color/main_color"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            android:letterSpacing="0"/>
 
         <Button
             android:id="@+id/UL_customerLGNBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/toggle_bg_user_login"
             android:text="@string/user_login_cust_txt"
-            android:textColor="@color/main_color"
-            android:background="@drawable/ul_login_btn_wrapper"/>
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            android:letterSpacing="0"/>
 
     </LinearLayout>
 

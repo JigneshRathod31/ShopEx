@@ -7,9 +7,14 @@ import android.os.Handler;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.jignesh.shopex.customer.CustomerLogin;
+import com.jignesh.shopex.shopkeeper.ShopkeeperLogin;
+
 public class userLogin extends AppCompatActivity{
 
     Button customer_lgn, shop_keeper_lgn;
+    LottieAnimationView lottieAnimationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +28,13 @@ public class userLogin extends AppCompatActivity{
             shop_keeper_lgn.setTextColor(getResources().getColor(R.color.white));
             customer_lgn.setBackground(getResources().getDrawable(R.drawable.ul_login_btn_wrapper));
             customer_lgn.setTextColor(getResources().getColor(R.color.main_color));
-
+            lottieAnimationView.pauseAnimation();
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    startActivity(new Intent(userLogin.this,LoginActivity.class));
+                    startActivity(new Intent(userLogin.this, ShopkeeperLogin.class));
                 }
-            },6000);
+            },200);
         });
 
         customer_lgn.setOnClickListener(View -> {
@@ -37,19 +42,20 @@ public class userLogin extends AppCompatActivity{
             customer_lgn.setTextColor(getResources().getColor(R.color.white));
             shop_keeper_lgn.setBackground(getResources().getDrawable(R.drawable.ul_login_btn_wrapper));
             shop_keeper_lgn.setTextColor(getResources().getColor(R.color.main_color));
-
+            lottieAnimationView.pauseAnimation();
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    startActivity(new Intent(userLogin.this,LoginActivity.class));
+                    startActivity(new Intent(userLogin.this, CustomerLogin.class));
                 }
-            },6000);
+            },200);
         });
     }
 
     private void init(){
         customer_lgn = findViewById(R.id.UL_customerLGNBtn);
         shop_keeper_lgn = findViewById(R.id.UL_shopKeeperLGNBtn);
+        lottieAnimationView = findViewById(R.id.lottie_anim);
     }
 
 }
