@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -25,7 +26,10 @@ public class CustomerRegistration extends AppCompatActivity {
         setContentView(R.layout.activity_customer_registration);
 
         init();
+
+        /** Register Button **/
         csmRegBtn.setOnClickListener(View -> {
+            String[] data = getData();
 
         });
 
@@ -41,5 +45,15 @@ public class CustomerRegistration extends AppCompatActivity {
 
         csmRegBtn = findViewById(R.id.cms_reg_btn_register);
         csmLgnTv = findViewById(R.id.tv_csm_reg_login_here);
+    }
+
+    private String[] getData(){
+        int i = 0;
+        String[] data = new String[editTextIds.length];
+
+        for(EditText singleET : editTexts)
+            data[i++] = singleET.getText().toString();
+
+        return data;
     }
 }

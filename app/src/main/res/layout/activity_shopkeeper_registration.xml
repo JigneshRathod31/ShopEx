@@ -78,7 +78,7 @@
                 android:drawableStart="@drawable/ic_add"
                 android:drawablePadding="8dp"
                 android:hint="@string/reg_add_hint"
-                android:inputType="number"
+                android:inputType="textPostalAddress"
                 android:padding="12dp" />
 
             <EditText
@@ -90,7 +90,7 @@
                 android:drawableStart="@drawable/ic_store"
                 android:drawablePadding="8dp"
                 android:hint="@string/reg_shop_name_hint"
-                android:inputType="number"
+                android:inputType="text"
                 android:padding="12dp" />
 
             <EditText
@@ -102,11 +102,11 @@
                 android:drawableStart="@drawable/ic_user"
                 android:drawablePadding="8dp"
                 android:hint="@string/reg_shop_owner_hint"
-                android:inputType="number"
+                android:inputType="text"
                 android:padding="12dp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/skp_lgn_ctg_et"
+                android:id="@+id/skp_reg_ctg_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -151,6 +151,62 @@
                 android:hint="@string/reg_cfm_pass_hint"
                 android:inputType="textPassword"
                 android:padding="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/main_color"
+                android:layout_marginTop="8dp"
+                android:textSize="16sp"
+                android:text="@string/reg_work_days_title"/>
+
+            <RadioGroup
+                android:id="@+id/skp_reg_work_days"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="4dp"
+                    android:paddingHorizontal="8dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/reg_custom_radio"
+                    android:text="@string/reg_work_days_rb1"
+                    android:textColor="@drawable/reg_custom_radio_txt_clr"/>
+
+                <RadioButton
+                    android:id="@+id/rb2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="4dp"
+                    android:paddingHorizontal="8dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/reg_custom_radio"
+                    android:text="@string/reg_work_days_rb2"
+                    android:textColor="@drawable/reg_custom_radio_txt_clr"/>
+
+                <RadioButton
+                    android:id="@+id/rb3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="4dp"
+                    android:paddingHorizontal="8dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/reg_custom_radio"
+                    android:text="@string/reg_work_days_rb3"
+
+                    android:textColor="@drawable/reg_custom_radio_txt_clr"/>
+
+            </RadioGroup>
 
             <Button
                 android:id="@+id/skp_reg_btn_register"

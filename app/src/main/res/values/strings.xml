@@ -48,6 +48,11 @@
     <string name="reg_lgn_email_hint">Email</string>
     <string name="reg_lgn_pass_hint">Password</string>
     <string name="reg_cfm_pass_hint">Confirm Password</string>
+    <string name="reg_work_days_title">Select Working Days</string>
+    <string name="reg_work_days_rb1">MON - FRI</string>
+    <string name="reg_work_days_rb2">MON - SAT</string>
+    <string name="reg_work_days_rb3">ALL DAYS</string>
     <string name="reg_btn">Register</string>
     <string name="lgn_btn">Login</string>
+
 </resources>
