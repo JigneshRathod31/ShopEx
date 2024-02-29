@@ -65,12 +65,12 @@
                 android:padding="15dp">
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/frg_csm_acc_usr_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="10dp"
                     app:boxBackgroundMode="outline"
-                    app:boxStrokeColor="@color/main_color"
-                    app:boxStrokeWidth="1dp">
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -82,12 +82,12 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/frg_csm_acc_usr_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="10dp"
                     app:boxBackgroundMode="outline"
-                    app:boxStrokeColor="@color/main_color"
-                    app:boxStrokeWidth="1dp">
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -99,13 +99,12 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/frg_csm_acc_usr_mob"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
-                    app:boxBackgroundMode="outline"
-                    app:boxStrokeColor="@color/main_color"
-                    app:boxStrokeWidth="1dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     app:prefixText="+91"
                     app:counterEnabled="true"
                     app:counterMaxLength="10">
@@ -120,12 +119,12 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/frg_csm_acc_usr_add"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     app:boxBackgroundMode="outline"
-                    app:boxStrokeColor="@color/main_color"
-                    app:boxStrokeWidth="1dp">
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"

@@ -7,7 +7,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.jignesh.shopex.R;
 
 /**
@@ -62,6 +65,20 @@ public class CustomerAccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_customer_account, container, false);
+        View accFragment = inflater.inflate(R.layout.fragment_customer_account, container, false);
+
+        int[] textInputLayoutIds = {R.id.frg_csm_acc_usr_name, R.id.frg_csm_acc_usr_email, R.id.frg_csm_acc_usr_mob, R.id.frg_csm_acc_usr_add};
+        TextInputLayout[] textInputLayouts = new TextInputLayout[textInputLayoutIds.length];
+
+        int i, length = textInputLayoutIds.length;
+        for(i = 0; i < length; i++)
+            textInputLayouts[i] = accFragment.findViewById(textInputLayoutIds[i]);
+
+        Button frgCsmSaveBtn = accFragment.findViewById(R.id.frg_csm_acc_save_btn);
+        frgCsmSaveBtn.setOnClickListener(View -> {
+
+        });
+
+        return accFragment;
     }
 }
