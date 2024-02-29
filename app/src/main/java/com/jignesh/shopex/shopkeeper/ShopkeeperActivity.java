@@ -7,11 +7,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.jignesh.shopex.LoginActivity;
 import com.jignesh.shopex.R;
 import com.jignesh.shopex.customer.ui.CustomerAccountFragment;
 import com.jignesh.shopex.customer.ui.CustomerHomeFragment;
@@ -19,6 +21,7 @@ import com.jignesh.shopex.customer.ui.CustomerMyOrdersFragment;
 import com.jignesh.shopex.shopkeeper.ui.ShopkeeperAccountFragment;
 import com.jignesh.shopex.shopkeeper.ui.ShopkeeperDashboardFragment;
 import com.jignesh.shopex.shopkeeper.ui.ShopkeeperStoreFragment;
+import com.jignesh.shopex.utils.SendNotification;
 
 public class ShopkeeperActivity extends AppCompatActivity {
 
@@ -28,6 +31,8 @@ public class ShopkeeperActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopkeeper);
+
+        SendNotification.sendNotification(ShopkeeperActivity.this, "Title", "Content", new Intent(this, LoginActivity.class));
 
         shopkeeperBNV = findViewById(R.id.shopkeeper_bottomNavigationView);
         replaceFragment(new ShopkeeperDashboardFragment());
