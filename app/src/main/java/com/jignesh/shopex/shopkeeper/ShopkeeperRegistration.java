@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jignesh.shopex.R;
@@ -21,6 +23,8 @@ public class ShopkeeperRegistration extends AppCompatActivity {
     TextView skpLgnTv;
 
     TextInputLayout skpRegCtg;
+
+    RadioGroup skpRadioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,15 +51,17 @@ public class ShopkeeperRegistration extends AppCompatActivity {
         skpRegBtn = findViewById(R.id.skp_reg_btn_register);
         skpLgnTv = findViewById(R.id.tv_skp_reg_login_here);
         skpRegCtg = findViewById(R.id.skp_reg_ctg_et);
+        skpRadioGroup = findViewById(R.id.skp_reg_work_days);
     }
 
     private String[] getData(){
         int i = 0;
-        String[] data = new String[editTextIds.length + 1];
+        String[] data = new String[editTextIds.length + 2];
         for(EditText singleET : editTexts)
             data[i++] = singleET.getText().toString();
 
         data[i++] = skpRegCtg.getEditText().getText().toString();
+        data[i] = ((RadioButton) findViewById(skpRadioGroup.getCheckedRadioButtonId())).getText().toString();
 
         return data;
     }
