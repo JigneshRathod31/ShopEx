@@ -217,6 +217,8 @@ public class ShopkeeperStoreFragment extends Fragment {
             String productQty = etAddProductQuantity.getText().toString().trim();
             String productOnboard = "true";
 
+            Toast.makeText(getContext(), productImage, Toast.LENGTH_SHORT).show();
+
             HashMap<String, String> productDetails = new HashMap<>();
             productDetails.put("product_image", productImage);
             productDetails.put("product_name", productName);
