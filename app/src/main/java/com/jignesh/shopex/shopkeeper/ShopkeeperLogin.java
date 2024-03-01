@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.jignesh.shopex.R;
+import com.jignesh.shopex.customer.CustomerActivity;
 
 public class ShopkeeperLogin extends AppCompatActivity {
 
@@ -25,7 +26,9 @@ public class ShopkeeperLogin extends AppCompatActivity {
         skpLgnBtn = findViewById(R.id.skp_lgn_btn_login);
         skpRegTv = findViewById(R.id.tv_skp_register_here);
         skpLgnBtn.setOnClickListener(View -> {
+            /** FireStore Code **/
 
+            startActivity(new Intent(this, ShopkeeperActivity.class));
         });
 
         skpRegTv.setOnClickListener(View -> {

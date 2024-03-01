@@ -96,8 +96,6 @@ public class StoreProductAdapter extends RecyclerView.Adapter<StoreProductAdapte
             storageRef.child(productImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
-//                    Toast.makeText(context, productImage+" uri: "+uri, Toast.LENGTH_SHORT).show();
-//                    holder.ivProductImage.setImageURI(uri);
 
                     Glide.with(context)
                             .load(uri)
@@ -111,7 +109,7 @@ public class StoreProductAdapter extends RecyclerView.Adapter<StoreProductAdapte
             });
         } catch (Exception e) {
             Log.d("getImageError", e.toString());
-//            Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
         }
 
     }

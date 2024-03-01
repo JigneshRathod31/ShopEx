@@ -52,7 +52,7 @@ public class CustomerActivity extends AppCompatActivity {
                             replaceFragment(new CustomerMyOrdersFragment());
                             break;
                         case R.id.c_account:
-                            replaceFragment(new ShopkeeperAccountFragment());
+                            replaceFragment(new CustomerAccountFragment());
                             break;
                     }
                     return true;

@@ -27,6 +27,13 @@
 
         </activity>
         <activity android:name=".SplashScreen"
+            android:exported="false">
+
+        </activity>
+        <activity android:name=".customer.CustomerLogin"
+            android:exported="false">
+        </activity>
+        <activity android:name=".userLogin"
             android:exported="true">
 
             <intent-filter>
@@ -35,20 +42,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-        </activity>
-        <activity
-            android:name=".RegistrationActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".LoginActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
         </activity>
         <activity
             android:name=".MainActivity"

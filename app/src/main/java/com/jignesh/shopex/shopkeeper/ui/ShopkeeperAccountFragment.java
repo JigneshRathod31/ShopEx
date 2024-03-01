@@ -78,7 +78,7 @@ public class ShopkeeperAccountFragment extends Fragment {
 
         Button frgSkpSaveBtn = accFragment.findViewById(R.id.frg_skp_acc_save_btn);
         frgSkpSaveBtn.setOnClickListener(View -> {
-            Toast.makeText(accFragment.getContext(), "DAbayu", Toast.LENGTH_SHORT).show();
+            /** FireStore Code **/
         });
 
         return accFragment;

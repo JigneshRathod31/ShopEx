@@ -13,7 +13,6 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-import com.jignesh.shopex.LoginActivity;
 import com.jignesh.shopex.ProductsFragment;
 import com.jignesh.shopex.R;
 import com.jignesh.shopex.customer.ui.CustomerAccountFragment;
