@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.common.internal.ConnectionTelemetryConfiguration;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -36,15 +37,20 @@ public class StoreProductAdapter extends RecyclerView.Adapter<StoreProductAdapte
     ArrayList<ProductModel> alStoreProductModel;
     Context context;
     String shopName;
+
     FirebaseFirestore db;
     FirebaseUser currentUser;
+    FirebaseStorage firebaseStorage;
+    StorageReference storageRef;
 
     public StoreProductAdapter(ArrayList<ProductModel> alStoreProductModel, Context context, String shopName) {
         this.alStoreProductModel = alStoreProductModel;
         this.context = context;
         this.shopName = shopName;
+
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        firebaseStorage = FirebaseStorage.getInstance();
     }
 
     @NonNull
@@ -57,7 +63,7 @@ public class StoreProductAdapter extends RecyclerView.Adapter<StoreProductAdapte
 
     @Override
     public void onBindViewHolder(@NonNull StoreProductAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.ivProductImage.setImageResource(R.mipmap.ic_launcher_foreground);
+        loadProductImage(alStoreProductModel.get(position).getProductImage(), holder);
 
         holder.tvProductName.setText(alStoreProductModel.get(position).getProductName());
         holder.tvProductPrice.setText(alStoreProductModel.get(position).getProductPrice());
@@ -82,6 +88,32 @@ public class StoreProductAdapter extends RecyclerView.Adapter<StoreProductAdapte
     @Override
     public int getItemCount() {
         return alStoreProductModel.size();
+    }
+
+    void loadProductImage(String productImage, @NonNull StoreProductAdapter.ViewHolder holder){
+        try {
+            storageRef = firebaseStorage.getReference();
+            storageRef.child(productImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Toast.makeText(context, productImage+" uri: "+uri, Toast.LENGTH_SHORT).show();
+//                    holder.ivProductImage.setImageURI(uri);
+
+                    Glide.with(context)
+                            .load(uri)
+                            .into(holder.ivProductImage);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle any errors
+                }
+            });
+        } catch (Exception e) {
+            Log.d("getImageError", e.toString());
+            Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     void addCardProductOnFirebase(HashMap<String, String> productDetails){
