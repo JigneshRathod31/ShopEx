@@ -150,7 +150,7 @@ public class ShopkeeperStoreFragment extends Fragment {
 
                 } catch (Exception e) {
                     Log.d("dalle", e.toString());
-                    Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -186,25 +186,44 @@ public class ShopkeeperStoreFragment extends Fragment {
             if (imgUri != null){
                 storageReference = FirebaseStorage.getInstance().getReference().child("products").child(etAddProductName.getText().toString().trim());
 
-                storageReference.putFile(imgUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        try {
-                            if (task.isSuccessful()){
-                                Log.d("success", "Product added successfully");
-                                Toast.makeText(getContext(), "success", Toast.LENGTH_SHORT).show();
-                            }else {
-                                Log.d("error", task.getException().toString());
-                                Toast.makeText(getContext(), "failed", Toast.LENGTH_SHORT).show();
+                try{
+                    storageReference.putFile(imgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            try {
+                                Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+                            } catch (Exception e) {
+                                Log.d("dalle", e+"");
                             }
-                        } catch (Exception e) {
-                            Log.d("dalle", e.toString());
                         }
-                    }
-                });
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                        }
+                    });
+                } catch (Exception e) {
+                    Log.d("dalle", e+"");
+                }
+
+//                storageReference.putFile(imgUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+//                        try {
+//                            if (task.isSuccessful()){
+//                                Log.d("success", "Product added successfully");
+//                                Toast.makeText(getContext(), "success", Toast.LENGTH_SHORT).show();
+//                            }else {
+//                                Log.d("error", task.getException().toString());
+//                                Toast.makeText(getContext(), "failed", Toast.LENGTH_SHORT).show();
+//                            }
+//                        } catch (Exception e) {
+//                            Log.d("dalle", e.toString());
+//                        }
+//                    }
+//                });
             }
         } catch (Exception e) {
-            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -216,8 +235,6 @@ public class ShopkeeperStoreFragment extends Fragment {
             String productPrice = etAddProductPrice.getText().toString().trim();
             String productQty = etAddProductQuantity.getText().toString().trim();
             String productOnboard = "true";
-
-            Toast.makeText(getContext(), productImage, Toast.LENGTH_SHORT).show();
 
             HashMap<String, String> productDetails = new HashMap<>();
             productDetails.put("product_image", productImage);
@@ -243,7 +260,7 @@ public class ShopkeeperStoreFragment extends Fragment {
                         }
                     });
         } catch (Exception e) {
-            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 }
