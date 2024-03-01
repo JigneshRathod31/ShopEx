@@ -31,6 +31,7 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/customer_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/frg_csm_acc_greet"

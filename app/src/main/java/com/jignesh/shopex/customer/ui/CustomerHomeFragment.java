@@ -108,7 +108,6 @@ public class CustomerHomeFragment extends Fragment {
 
         } catch (Exception e) {
             Log.d("error", e.toString());
-//            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
         }
 
         return root;

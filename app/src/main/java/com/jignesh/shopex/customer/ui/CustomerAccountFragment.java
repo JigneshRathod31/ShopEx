@@ -1,20 +1,18 @@
 package com.jignesh.shopex.customer.ui;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseApp;
@@ -30,18 +28,20 @@ import com.jignesh.shopex.R;
 
 public class CustomerAccountFragment extends Fragment {
 
-    int[] textInputLayoutIds = {R.id.frg_csm_acc_usr_name, R.id.frg_csm_acc_usr_email, R.id.frg_csm_acc_usr_mob, R.id.frg_csm_acc_usr_add};
-    TextInputLayout[] textInputLayouts = new TextInputLayout[textInputLayoutIds.length];
-
-    String ROOT = "gnr";
-    String CUS_DOC = "custmers$";
-    String CUS_COLL = "Customers";
-    String USER = "jk@gmail.com";
-
-    // Firebase Objects
-
     FirebaseApp firebaseApp;
     FirebaseFirestore db;
+
+    int[] textInputLayoutIds = {R.id.frg_csm_acc_usr_name, R.id.frg_csm_acc_usr_email, R.id.frg_csm_acc_usr_mob, R.id.frg_csm_acc_usr_add};
+    TextInputLayout[] textInputLayouts = new TextInputLayout[textInputLayoutIds.length];
+    TextView greet_name;
+
+    final String ROOT = "gnr";
+    final String CUS_DOC = "customer$";
+    final String CUS_COLL = "Customers";
+    final String USER = "jk@gmail.com";
+
+    final String[] keys = {"name", "email", "mobile", "address"};
+    String[] data = new String[keys.length];
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -94,45 +94,58 @@ public class CustomerAccountFragment extends Fragment {
         // Inflate the layout for this fragment
         View accFragment = inflater.inflate(R.layout.fragment_customer_account, container, false);
 
-        try{
+        try {
             FirebaseApp.initializeApp(getContext());
             db = FirebaseFirestore.getInstance();
-            int i, length = textInputLayoutIds.length;
-            for(i = 0; i < length; i++)
-                textInputLayouts[i] = accFragment.findViewById(textInputLayoutIds[i]);
+        } catch (Exception e) {
+            Toast.makeText(getContext(), "Error: " + e.toString(), Toast.LENGTH_SHORT).show();
         }
-        catch (Exception e){
-            Log.d("error", e.toString());
-            Toast.makeText(getContext(), "Errorva: "+e.toString(), Toast.LENGTH_SHORT).show();
-        }
+        greet_name = accFragment.findViewById(R.id.customer_name);
+
+        int length = textInputLayoutIds.length;
+        for (int i = 0; i < length; i++)
+            textInputLayouts[i] = accFragment.findViewById(textInputLayoutIds[i]);
 
         loadData();
 
         Button frgCsmSaveBtn = accFragment.findViewById(R.id.frg_csm_acc_save_btn);
         frgCsmSaveBtn.setOnClickListener(View -> {
             /** FireStore Code **/
+            int len = keys.length;
+            for (int i = 0; i < len; i++) {
+                if (data[i].equals(textInputLayouts[i].getEditText().getText().toString())) {
+                    /** update code **/
+                }
+            }
         });
 
         return accFragment;
     }
 
-    private void loadData(){
-            db.collection("gnr")
-                    .document("customer$")
-                    .collection("Customers")
-                    .document("jk@gmail.com")
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful()){
-                                DocumentSnapshot document = task.getResult();
+    private void loadData() {
+        db.collection(ROOT)
+                .document(CUS_DOC)
+                .collection(CUS_COLL)
+                .document(USER)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
 
-                                Toast.makeText(getContext(), document.get("name").toString(), Toast.LENGTH_SHORT).show();
-                            }else {
+                            int i, len = document.getData().size();
 
+                            greet_name.setText(document.get(keys[0]).toString());
+                            for (i = 0; i < len - 1; i++) {
+                                data[i] = document.get(keys[i]).toString();
+                                textInputLayouts[i].getEditText().setText(document.get(keys[i]).toString());
                             }
+
+                        } else {
+                            Toast.makeText(getContext(), "task failed", Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    }
+                });
     }
 }
