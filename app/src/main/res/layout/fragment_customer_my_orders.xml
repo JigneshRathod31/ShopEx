@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
+    android:background="@color/light_bg_color"
     tools:context=".customer.ui.CustomerMyOrdersFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_my_orders"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="MyOrdersFragment" />
+        android:layout_height="wrap_content" />
 
 </FrameLayout>

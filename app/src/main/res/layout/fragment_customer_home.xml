@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="8dp"
+    android:background="@color/light_bg_color"
     tools:context=".customer.ui.CustomerHomeFragment">
 
     <androidx.recyclerview.widget.RecyclerView

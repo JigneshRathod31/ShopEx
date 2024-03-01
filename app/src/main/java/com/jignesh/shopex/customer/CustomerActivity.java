@@ -9,6 +9,9 @@ import androidx.fragment.app.FragmentTransaction;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -20,6 +23,9 @@ import com.jignesh.shopex.R;
 import com.jignesh.shopex.customer.ui.CustomerAccountFragment;
 import com.jignesh.shopex.customer.ui.CustomerHomeFragment;
 import com.jignesh.shopex.customer.ui.CustomerMyOrdersFragment;
+import com.jignesh.shopex.shopkeeper.ui.ShopkeeperAccountFragment;
+
+import java.util.zip.Inflater;
 
 public class CustomerActivity extends AppCompatActivity {
 
@@ -68,4 +74,18 @@ public class CustomerActivity extends AppCompatActivity {
         ft.commit();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.cart_menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.cart_menu_item){
+            replaceFragment(new ShoppingCartFragment());
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

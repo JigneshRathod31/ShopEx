@@ -4,9 +4,11 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:foreground="?attr/selectableItemBackground"
+    android:clickable="true"
     app:cardUseCompatPadding="true"
     app:cardCornerRadius="8dp"
-    app:cardElevation="8dp">
+    app:cardElevation="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,22 +17,27 @@
         android:padding="12dp">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/iv_product_image"
+            android:layout_width="136dp"
+            android:layout_height="136dp"
+            android:layout_gravity="center_horizontal"
             android:src="@mipmap/ic_launcher" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:weightSum="11"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_weight="6">
+                android:layout_weight="9">
 
                 <TextView
+                    android:id="@+id/tv_product_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Product Title"
@@ -39,11 +46,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Product description, where some details or description of the product will be there." />
-
-                <TextView
+                    android:id="@+id/tv_product_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="₹180"
@@ -54,14 +57,32 @@
             </LinearLayout>
 
             <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_weight="1"
+                android:id="@+id/iv_add_product_to_cart"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="2"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:src="@drawable/ic_baseline_add_circle_24"
                 android:textStyle="bold"
                 android:layout_gravity="center_vertical" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_product_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Product description, where some details or description of the product will be there." />
+
+        <TextView
+            android:id="@+id/tv_product_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="Qty: 12"
+            android:textStyle="bold"
+            android:textSize="16sp" />
 
     </LinearLayout>
 
