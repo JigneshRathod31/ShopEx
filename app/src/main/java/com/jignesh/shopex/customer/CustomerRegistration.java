@@ -1,5 +1,6 @@
 package com.jignesh.shopex.customer;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,6 +11,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.jignesh.shopex.R;
 
 import java.util.regex.Pattern;
@@ -25,16 +31,22 @@ public class CustomerRegistration extends AppCompatActivity {
     Button csmRegBtn;
     TextView csmLgnTv;
 
+    final String ROOT = "gnr";
+    final String CUS_COLL = "customer$";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_customer_registration);
 
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         init();
 
         /** Register Button **/
         csmRegBtn.setOnClickListener(View -> {
             String[] data = getData();
+
         });
 
         csmLgnTv.setOnClickListener(View -> {
@@ -44,7 +56,7 @@ public class CustomerRegistration extends AppCompatActivity {
 
     private void init(){
         int i, j, len1 = editTextIds.length, len2 = strPatterns.length;
-        for(i = 0, j = 0; i < len1 && j < len2; i++, j++) {
+        for(i = 0; i < len1; i++) {
             editTexts[i] = findViewById(editTextIds[i]);
         }
 
@@ -53,7 +65,7 @@ public class CustomerRegistration extends AppCompatActivity {
     }
 
     private String[] getData(){
-        int i = 0;
+        int i;
         String[] data = new String[editTextIds.length];
 
         return data;

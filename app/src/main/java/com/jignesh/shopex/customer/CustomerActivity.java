@@ -14,11 +14,12 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.jignesh.shopex.R;
 import com.jignesh.shopex.customer.ui.CustomerAccountFragment;
 import com.jignesh.shopex.customer.ui.CustomerHomeFragment;
 import com.jignesh.shopex.customer.ui.CustomerMyOrdersFragment;
-import com.jignesh.shopex.shopkeeper.ui.ShopkeeperAccountFragment;
 
 public class CustomerActivity extends AppCompatActivity {
 
@@ -27,6 +28,7 @@ public class CustomerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_customer);
 
         try {

@@ -1,16 +1,25 @@
 package com.jignesh.shopex.customer.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.jignesh.shopex.R;
 
 /**
@@ -20,6 +29,19 @@ import com.jignesh.shopex.R;
  */
 
 public class CustomerAccountFragment extends Fragment {
+
+    int[] textInputLayoutIds = {R.id.frg_csm_acc_usr_name, R.id.frg_csm_acc_usr_email, R.id.frg_csm_acc_usr_mob, R.id.frg_csm_acc_usr_add};
+    TextInputLayout[] textInputLayouts = new TextInputLayout[textInputLayoutIds.length];
+
+    String ROOT = "gnr";
+    String CUS_DOC = "custmers$";
+    String CUS_COLL = "Customers";
+    String USER = "jk@gmail.com";
+
+    // Firebase Objects
+
+    FirebaseApp firebaseApp;
+    FirebaseFirestore db;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,7 +53,6 @@ public class CustomerAccountFragment extends Fragment {
     private String mParam2;
 
     public CustomerAccountFragment() {
-        // Required empty public constructor
     }
 
     /**
@@ -62,17 +83,30 @@ public class CustomerAccountFragment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        firebaseApp = FirebaseApp.initializeApp(getContext());
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View accFragment = inflater.inflate(R.layout.fragment_customer_account, container, false);
 
-        int[] textInputLayoutIds = {R.id.frg_csm_acc_usr_name, R.id.frg_csm_acc_usr_email, R.id.frg_csm_acc_usr_mob, R.id.frg_csm_acc_usr_add};
-        TextInputLayout[] textInputLayouts = new TextInputLayout[textInputLayoutIds.length];
+        try{
+            FirebaseApp.initializeApp(getContext());
+            db = FirebaseFirestore.getInstance();
+            int i, length = textInputLayoutIds.length;
+            for(i = 0; i < length; i++)
+                textInputLayouts[i] = accFragment.findViewById(textInputLayoutIds[i]);
+        }
+        catch (Exception e){
+            Log.d("error", e.toString());
+            Toast.makeText(getContext(), "Errorva: "+e.toString(), Toast.LENGTH_SHORT).show();
+        }
 
-        int i, length = textInputLayoutIds.length;
-        for(i = 0; i < length; i++)
-            textInputLayouts[i] = accFragment.findViewById(textInputLayoutIds[i]);
+        loadData();
 
         Button frgCsmSaveBtn = accFragment.findViewById(R.id.frg_csm_acc_save_btn);
         frgCsmSaveBtn.setOnClickListener(View -> {
@@ -80,5 +114,25 @@ public class CustomerAccountFragment extends Fragment {
         });
 
         return accFragment;
+    }
+
+    private void loadData(){
+            db.collection("gnr")
+                    .document("customer$")
+                    .collection("Customers")
+                    .document("jk@gmail.com")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()){
+                                DocumentSnapshot document = task.getResult();
+
+                                Toast.makeText(getContext(), document.get("name").toString(), Toast.LENGTH_SHORT).show();
+                            }else {
+
+                            }
+                        }
+                    });
     }
 }
