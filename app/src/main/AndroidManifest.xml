@@ -2,16 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-feature
-        android:name="android.hardware.telephony"
-        android:required="false" />
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -24,8 +17,8 @@
         android:theme="@style/Theme.ShopEx"
         tools:targetApi="31">
         <activity
-            android:name=".SplashScreen"
-            android:exported="true" >
+            android:name=".shopkeeper.ShopkeeperActivity"
+            android:exported="true">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,14 +28,9 @@
 
         </activity>
         <activity
-            android:name=".ImageChooser"
-            android:exported="false" />
-        <activity
-            android:name=".shopkeeper.ShopkeeperActivity"
-            android:exported="false" />
-        <activity
             android:name=".customer.CustomerActivity"
             android:exported="false">
+
         </activity>
         <activity
             android:name=".RegistrationActivity"

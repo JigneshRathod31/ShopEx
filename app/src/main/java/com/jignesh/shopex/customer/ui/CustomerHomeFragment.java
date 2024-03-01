@@ -1,6 +1,5 @@
 package com.jignesh.shopex.customer.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,11 +23,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.jignesh.shopex.ImageChooser;
 import com.jignesh.shopex.R;
 import com.jignesh.shopex.adapters.CustomerStoreAdapter;
 import com.jignesh.shopex.models.CustomerStoreModel;
-import com.jignesh.shopex.shopkeeper.ShopkeeperActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -105,7 +102,7 @@ public class CustomerHomeFragment extends Fragment {
             customerStoreAdapter = new CustomerStoreAdapter(alCustomerStoreModel, getContext());
             rvShopkeeperStores.setAdapter(customerStoreAdapter);
 
-            addStoreDetailsOnFirebase();
+//            addStoreDetailsOnFirebase();
 
             retrieveStoreDataFromFirebase();
 
@@ -130,6 +127,7 @@ public class CustomerHomeFragment extends Fragment {
 
                                 fetchStoreDetails(documents, 0);
                             }else{
+                                Log.d("error", task.getException().toString());
 //                                Toast.makeText(getContext(), task.getException().toString(), Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -145,7 +143,11 @@ public class CustomerHomeFragment extends Fragment {
     void fetchStoreDetails(List<DocumentSnapshot> documents, int i){
         if (i < documents.size()){
             DocumentSnapshot document = documents.get(i);
-            String shop = document.getId();
+            String shop = document.getId().trim();
+
+            if (shop.equals("customer$")){
+                fetchStoreDetails(documents, i+1);
+            }
 
             db.collection("gnr")
                     .document(shop)
