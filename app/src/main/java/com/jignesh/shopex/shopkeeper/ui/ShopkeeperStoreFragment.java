@@ -150,7 +150,7 @@ public class ShopkeeperStoreFragment extends Fragment {
 
                 } catch (Exception e) {
                     Log.d("dalle", e.toString());
-                    Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -223,7 +223,7 @@ public class ShopkeeperStoreFragment extends Fragment {
 //                });
             }
         } catch (Exception e) {
-            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -235,8 +235,6 @@ public class ShopkeeperStoreFragment extends Fragment {
             String productPrice = etAddProductPrice.getText().toString().trim();
             String productQty = etAddProductQuantity.getText().toString().trim();
             String productOnboard = "true";
-
-            Toast.makeText(getContext(), productImage, Toast.LENGTH_SHORT).show();
 
             HashMap<String, String> productDetails = new HashMap<>();
             productDetails.put("product_image", productImage);
@@ -262,7 +260,7 @@ public class ShopkeeperStoreFragment extends Fragment {
                         }
                     });
         } catch (Exception e) {
-            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 }
