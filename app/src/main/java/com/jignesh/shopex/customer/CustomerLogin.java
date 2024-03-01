@@ -24,7 +24,9 @@ public class CustomerLogin extends AppCompatActivity {
         csmLgnBtn = findViewById(R.id.csm_lgn_btn_login);
         csmRegTv = findViewById(R.id.tv_csm_register_here);
         csmLgnBtn.setOnClickListener(View -> {
+            /** FireStore Code **/
 
+            startActivity(new Intent(this,CustomerActivity.class));
         });
 
         csmRegTv.setOnClickListener(View -> {
