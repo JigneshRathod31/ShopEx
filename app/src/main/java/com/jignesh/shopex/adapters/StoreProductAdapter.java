@@ -53,7 +53,7 @@ public class StoreProductAdapter extends RecyclerView.Adapter<StoreProductAdapte
 
     @Override
     public void onBindViewHolder(@NonNull StoreProductAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.ivProductImage.setImageResource(R.drawable.ic_launcher_background);
+        holder.ivProductImage.setImageResource(R.mipmap.ic_launcher_foreground);
 
         holder.tvProductName.setText(alStoreProductModel.get(position).getProductName());
         holder.tvProductPrice.setText(alStoreProductModel.get(position).getProductPrice());

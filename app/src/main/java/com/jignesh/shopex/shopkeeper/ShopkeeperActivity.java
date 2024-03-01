@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.jignesh.shopex.LoginActivity;
+import com.jignesh.shopex.ProductsFragment;
 import com.jignesh.shopex.R;
 import com.jignesh.shopex.customer.ui.CustomerAccountFragment;
 import com.jignesh.shopex.customer.ui.CustomerHomeFragment;
@@ -45,7 +46,13 @@ public class ShopkeeperActivity extends AppCompatActivity {
                         replaceFragment(new ShopkeeperDashboardFragment());
                         break;
                     case R.id.s_store:
-                        replaceFragment(new ShopkeeperStoreFragment());
+                        Fragment productFragment = new ProductsFragment();
+                        Bundle args = new Bundle();
+                        args.putString("shopName", "pnp");
+                        args.putString("canAdd", "true");
+                        productFragment.setArguments(args);
+
+                        replaceFragment(productFragment);
                         break;
                     case R.id.s_account:
                         replaceFragment(new ShopkeeperAccountFragment());
