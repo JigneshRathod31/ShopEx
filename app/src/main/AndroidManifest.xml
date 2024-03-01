@@ -26,21 +26,25 @@
             android:exported="false">
 
         </activity>
-        <activity android:name=".SplashScreen"
-            android:exported="false">
-
-        </activity>
-        <activity android:name=".customer.CustomerLogin"
-            android:exported="false">
-        </activity>
-        <activity android:name=".userLogin"
+        <activity
+            android:name=".SplashScreen"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".customer.CustomerLogin"
+            android:exported="false"></activity>
+        <activity
+            android:name=".shopkeeper.ShopkeeperLogin"
+            android:exported="false"></activity>
+        <activity
+            android:name=".UserLogin"
+            android:exported="false">
 
         </activity>
         <activity
