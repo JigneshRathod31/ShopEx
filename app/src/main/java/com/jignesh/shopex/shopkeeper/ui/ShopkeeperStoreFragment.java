@@ -66,8 +66,6 @@ public class ShopkeeperStoreFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_shopkeeper_store, container, false);
 
-
-
         return view;
     }
 }
