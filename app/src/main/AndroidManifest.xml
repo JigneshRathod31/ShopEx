@@ -45,13 +45,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".LoginActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".MainActivity"
             android:exported="false">
             <meta-data
@@ -61,8 +54,7 @@
         <activity
             android:name=".customer.CustomerActivity"
             android:exported="false" />
-        <activity
-            android:name=".RegistrationActivity"
+        <activity android:name=".shopkeeper.ShopkeeperActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

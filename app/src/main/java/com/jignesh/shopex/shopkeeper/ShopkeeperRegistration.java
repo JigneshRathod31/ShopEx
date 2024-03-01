@@ -20,6 +20,7 @@ public class ShopkeeperRegistration extends AppCompatActivity {
             R.id.skp_reg_shop_name_et, R.id.skp_reg_shop_owner_et,
             R.id.skp_reg_pass_et,R.id.skp_reg_cfm_pass_et};
 
+
     EditText[] editTexts = new EditText[editTextIds.length];
     Button skpRegBtn;
     TextView skpLgnTv;
