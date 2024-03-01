@@ -99,7 +99,6 @@ public class ProductsFragment extends Fragment {
                 fabAddProduct.setVisibility(View.GONE);
             }
 
-            Toast.makeText(getContext(), "product 1", Toast.LENGTH_SHORT).show();
             alStoreProductModel = new ArrayList<>();
             rvProducts.setLayoutManager(new GridLayoutManager(getContext(), 2));
             storeProductAdapter = new StoreProductAdapter(alStoreProductModel, getContext(), mShopName);
@@ -107,7 +106,6 @@ public class ProductsFragment extends Fragment {
 
             retrieveProductDataFromFirebase();
 
-            Toast.makeText(getContext(), "product 2", Toast.LENGTH_SHORT).show();
             fabAddProduct.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

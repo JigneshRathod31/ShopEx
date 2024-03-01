@@ -96,8 +96,6 @@ public class StoreProductAdapter extends RecyclerView.Adapter<StoreProductAdapte
             storageRef.child(productImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
-                    Toast.makeText(context, productImage+" uri: "+uri, Toast.LENGTH_SHORT).show();
-//                    holder.ivProductImage.setImageURI(uri);
 
                     Glide.with(context)
                             .load(uri)

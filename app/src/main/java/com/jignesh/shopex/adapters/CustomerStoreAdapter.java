@@ -57,7 +57,7 @@ public class CustomerStoreAdapter extends RecyclerView.Adapter<CustomerStoreAdap
             holder.tvAddress.setText(alCustomerStoreModel.get(position).getAddress());
             holder.ivShopLogo.setImageResource(R.mipmap.ic_launcher_foreground);
 
-            holder.ivMobile.setImageResource(R.drawable.ic_baseline_phone_24);
+//            loadStoreLogo
 
             holder.cvStoreItem.setOnClickListener(new View.OnClickListener() {
                 @Override
