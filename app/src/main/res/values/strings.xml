@@ -11,6 +11,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- user login Activity -->
+
+    <string name="user_login_sk_txt">Shop Keeper</string>
+    <string name="user_login_cust_txt">Customer</string>
+    <string name="user_login_warn_txt">Are you customer / shop keeper?</string>
+
     <!-- customer account fragment -->
     <string name="frg_csm_acc_usr_name_hint">Username</string>
     <string name="frg_csm_acc_email_hint">Email</string>
@@ -26,9 +32,27 @@
     <string name="frg_skp_acc_mob_hint">Mobile no</string>
     <string name="frg_skp_acc_add_hint">Address</string>
     <string name="frg_skp_acc_ctg_hint">Category</string>
-    <string name="frg_skp_acc_open_time_hint">Open time</string>
-    <string name="frg_skp_acc_close_time_hint">Close time</string>
-    <string name="frg_skp_acc_open_time">9:00 AM</string>
-    <string name="frg_skp_acc_close_time">9:00 PM</string>
+    <string name="frg_skp_acc_working_days_hint">Working days</string>
+    <string name="frg_skp_acc_working_days">MON - SAT</string>
     <string name="frg_skp_acc_save_btn">Save</string>
+
+    <!-- registration & login activities -->
+    <string name="reg_title">Register</string>
+    <string name="lgn_title">Login</string>
+    <string name="reg_usr_name_hint">Username</string>
+    <string name="reg_mob_hint">Mobile No</string>
+    <string name="reg_add_hint">Address</string>
+    <string name="reg_shop_name_hint">Shopname</string>
+    <string name="reg_shop_owner_hint">Shopowner</string>
+    <string name="reg_ctg_hint">Category</string>
+    <string name="reg_lgn_email_hint">Email</string>
+    <string name="reg_lgn_pass_hint">Password</string>
+    <string name="reg_cfm_pass_hint">Confirm Password</string>
+    <string name="reg_work_days_title">Select Working Days</string>
+    <string name="reg_work_days_rb1">MON - FRI</string>
+    <string name="reg_work_days_rb2">MON - SAT</string>
+    <string name="reg_work_days_rb3">ALL DAYS</string>
+    <string name="reg_btn">Register</string>
+    <string name="lgn_btn">Login</string>
+
 </resources>

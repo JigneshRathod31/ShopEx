@@ -50,7 +50,7 @@ public class CustomerCartProductAdapter extends RecyclerView.Adapter<CustomerCar
 
     @Override
     public void onBindViewHolder(@NonNull CustomerCartProductAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.ivCartProductImage.setImageResource(R.drawable.ic_launcher_foreground);
+        holder.ivCartProductImage.setImageResource(R.mipmap.ic_launcher_foreground);
 
         holder.tvCartProductName.setText(alCustomerCartProductModel.get(position).getProductName());
         holder.tvCartProductPrice.setText(alCustomerCartProductModel.get(position).getProductPrice());

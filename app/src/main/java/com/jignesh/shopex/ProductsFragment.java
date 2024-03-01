@@ -3,6 +3,9 @@ package com.jignesh.shopex;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +26,7 @@ import com.jignesh.shopex.adapters.CustomerStoreAdapter;
 import com.jignesh.shopex.adapters.StoreProductAdapter;
 import com.jignesh.shopex.models.CustomerStoreModel;
 import com.jignesh.shopex.models.ProductModel;
+import com.jignesh.shopex.shopkeeper.ui.ShopkeeperStoreFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +47,9 @@ public class ProductsFragment extends Fragment {
     FloatingActionButton fabAddProduct;
 
     private static final String ARG_PARAM1 = "shopName";
+    private static final String ARG_PARAM2 = "canAdd";
     private String mShopName;
+    private String mCanAdd;
 
 
     public ProductsFragment() {
@@ -59,10 +65,11 @@ public class ProductsFragment extends Fragment {
      * @return A new instance of fragment ProductsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ProductsFragment newInstance(String param1) {
+    public static ProductsFragment newInstance(String param1, String param2) {
         ProductsFragment fragment = new ProductsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -72,6 +79,7 @@ public class ProductsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mShopName = getArguments().getString(ARG_PARAM1);
+            mCanAdd = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -80,15 +88,38 @@ public class ProductsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_products, container, false);
 
-        db = FirebaseFirestore.getInstance();
-        rvProducts = view.findViewById(R.id.rv_products);
+        try {
+            db = FirebaseFirestore.getInstance();
+            rvProducts = view.findViewById(R.id.rv_products);
+            fabAddProduct = view.findViewById(R.id.fab_add_product);
 
-        alStoreProductModel = new ArrayList<>();
-        rvProducts.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        storeProductAdapter = new StoreProductAdapter(alStoreProductModel, getContext(), mShopName);
-        rvProducts.setAdapter(storeProductAdapter);
+            if (mCanAdd.equals("true")){
+                fabAddProduct.setVisibility(View.VISIBLE);
+            }else {
+                fabAddProduct.setVisibility(View.GONE);
+            }
 
-        retrieveProductDataFromFirebase();
+            Toast.makeText(getContext(), "product 1", Toast.LENGTH_SHORT).show();
+            alStoreProductModel = new ArrayList<>();
+            rvProducts.setLayoutManager(new GridLayoutManager(getContext(), 2));
+            storeProductAdapter = new StoreProductAdapter(alStoreProductModel, getContext(), mShopName);
+            rvProducts.setAdapter(storeProductAdapter);
+
+            retrieveProductDataFromFirebase();
+
+            Toast.makeText(getContext(), "product 2", Toast.LENGTH_SHORT).show();
+            fabAddProduct.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FragmentManager fm = ((FragmentActivity) view.getContext()).getSupportFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.replace(R.id.s_frameLayout, new ShopkeeperStoreFragment());
+                    ft.commit();
+                }
+            });
+        } catch (Exception e) {
+            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+        }
 
         return view;
     }

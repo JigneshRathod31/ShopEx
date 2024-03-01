@@ -35,7 +35,7 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyOrdersAdapter.ViewHolder holder, int position) {
-        holder.ivOrderProductImage.setImageResource(R.drawable.ic_launcher_foreground);
+        holder.ivOrderProductImage.setImageResource(R.mipmap.ic_launcher_foreground);
 
         holder.tvOrderProductName.setText(alMyOrdersModel.get(position).getProductName());
         holder.tvOrderDate.setText("Date: " + alMyOrdersModel.get(position).getOrderDate());

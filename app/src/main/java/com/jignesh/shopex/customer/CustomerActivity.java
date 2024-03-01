@@ -52,7 +52,6 @@ public class CustomerActivity extends AppCompatActivity {
                             replaceFragment(new CustomerMyOrdersFragment());
                             break;
                         case R.id.c_account:
-/**                         temporary customer account fragment replaced with shopkeeper **/
                             replaceFragment(new ShopkeeperAccountFragment());
                             break;
                     }

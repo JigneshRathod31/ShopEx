@@ -55,7 +55,7 @@ public class CustomerStoreAdapter extends RecyclerView.Adapter<CustomerStoreAdap
             holder.tvShopCategory.setText(alCustomerStoreModel.get(position).getCategory());
             holder.tvActiveDays.setText(alCustomerStoreModel.get(position).getActiveDays());
             holder.tvAddress.setText(alCustomerStoreModel.get(position).getAddress());
-            holder.ivShopLogo.setImageResource(R.drawable.ic_launcher_foreground);
+            holder.ivShopLogo.setImageResource(R.mipmap.ic_launcher_foreground);
 
             holder.ivMobile.setImageResource(R.drawable.ic_baseline_phone_24);
 
@@ -65,6 +65,7 @@ public class CustomerStoreAdapter extends RecyclerView.Adapter<CustomerStoreAdap
                     Fragment productFragment = new ProductsFragment();
                     Bundle args = new Bundle();
                     args.putString("shopName", alCustomerStoreModel.get(position).getShopName());
+                    args.putString("canAdd", "false");
                     productFragment.setArguments(args);
 
                     FragmentManager fm = ((FragmentActivity) view.getContext()).getSupportFragmentManager();
