@@ -2,15 +2,23 @@ package com.jignesh.shopex.shopkeeper.ui;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.jignesh.shopex.R;
 
 /**
@@ -19,6 +27,25 @@ import com.jignesh.shopex.R;
  * create an instance of this fragment.
  */
 public class ShopkeeperAccountFragment extends Fragment {
+
+    FirebaseApp firebaseApp;
+    FirebaseFirestore db;
+
+    final String ROOT = "gnr";
+    final String pnp_DOC = "pnp";
+    final String DETAILS_COLL = "Details";
+    final String DETAILS_DOC = "details_doc";
+
+    int[] textInputLayoutIds = {R.id.frg_skp_acc_shop_name, R.id.frg_skp_acc_shop_owner,
+            R.id.frg_skp_acc_shop_email, R.id.frg_skp_acc_shop_mob,
+            R.id.frg_skp_acc_shop_add, R.id.frg_skp_acc_shop_category, R.id.frg_skp_acc_shop_work_days};
+
+    TextView greet_txt_name;
+
+    TextInputLayout[] textInputLayouts = new TextInputLayout[textInputLayoutIds.length];
+
+    final String[] keys = {"shop_name","shop_owner","email","mobile","address","category","active_days"};
+    Button frgSkpSaveBtn;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,12 +79,19 @@ public class ShopkeeperAccountFragment extends Fragment {
     }
 
     @Override
+    public void onStart(){
+        super.onStart();
+        firebaseApp = FirebaseApp.initializeApp(getContext());
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        FirebaseApp.initializeApp(getContext());
     }
 
     @Override
@@ -66,21 +100,47 @@ public class ShopkeeperAccountFragment extends Fragment {
         // Inflate the layout for this fragment
         View accFragment = inflater.inflate(R.layout.fragment_shopkeeper_account, container, false);
 
-        int[] textInputLayoutIds = {R.id.frg_skp_acc_shop_name, R.id.frg_skp_acc_shop_owner,
-                R.id.frg_skp_acc_shop_email, R.id.frg_skp_acc_shop_mob,
-                R.id.frg_skp_acc_shop_add, R.id.frg_skp_acc_shop_category};
+        try{
+            db = FirebaseFirestore.getInstance();
+        }
+        catch (Exception e){
+            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+        }
 
-        TextInputLayout[] textInputLayouts = new TextInputLayout[textInputLayoutIds.length];
+        loadData();
 
         int i, length = textInputLayoutIds.length;
         for(i = 0; i < length; i++)
             textInputLayouts[i] = accFragment.findViewById(textInputLayoutIds[i]);
 
-        Button frgSkpSaveBtn = accFragment.findViewById(R.id.frg_skp_acc_save_btn);
+        greet_txt_name = accFragment.findViewById(R.id.shop_keeper_name);
+
+        frgSkpSaveBtn = accFragment.findViewById(R.id.frg_skp_acc_save_btn);
+
         frgSkpSaveBtn.setOnClickListener(View -> {
             /** FireStore Code **/
         });
 
         return accFragment;
+    }
+
+    private void loadData(){
+        db.collection(ROOT).document(pnp_DOC).collection(DETAILS_COLL).document(DETAILS_DOC).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot document = task.getResult();
+                int i, len = document.getData().size() - 2;
+
+                greet_txt_name.setText(document.get(keys[1]).toString());
+                for(i = 0; i < len; i++){
+                    textInputLayouts[i].getEditText().setText(document.getString(keys[i]));
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getContext(), "Data couldn't be fetched", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

@@ -1,5 +1,6 @@
 package com.jignesh.shopex.shopkeeper.ui;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,7 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.jignesh.shopex.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +24,8 @@ import com.jignesh.shopex.R;
  * create an instance of this fragment.
  */
 public class ShopkeeperDashboardFragment extends Fragment {
+
+    BarChart barChart;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +71,32 @@ public class ShopkeeperDashboardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shopkeeper_dashboard, container, false);
+        View dashFragment = inflater.inflate(R.layout.fragment_shopkeeper_dashboard, container, false);
+        barChart = dashFragment.findViewById(R.id.barChart);
+        barChart.setPinchZoom(false);
+        barChart.setDrawGridBackground(false);
+
+        ArrayList<BarEntry> data = new ArrayList<>();
+        data.add(new BarEntry(400,200));
+        data.add(new BarEntry(500,250));
+        data.add(new BarEntry(600,300));
+        data.add(new BarEntry(700,350));
+        data.add(new BarEntry(800,400));
+        data.add(new BarEntry(900,450));
+        data.add(new BarEntry(1000,500));
+
+        BarDataSet barDataSet = new BarDataSet(data,"Sales");
+        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        barDataSet.setValueTextColor(Color.BLACK);
+        barDataSet.setValueTextSize(16f);
+
+        BarData barData = new BarData(barDataSet);
+        barData.setBarWidth(50f);
+        barChart.setFitBars(true);
+        barChart.setData(barData);
+        barChart.getDescription().setText("Sales");
+        barChart.animateX(2000);
+
+        return dashFragment;
     }
 }

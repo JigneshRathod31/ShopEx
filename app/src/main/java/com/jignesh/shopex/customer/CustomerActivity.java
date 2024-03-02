@@ -5,26 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.FirebaseApp;
 import com.jignesh.shopex.R;
 import com.jignesh.shopex.customer.ui.CustomerAccountFragment;
 import com.jignesh.shopex.customer.ui.CustomerHomeFragment;
 import com.jignesh.shopex.customer.ui.CustomerMyOrdersFragment;
 import com.jignesh.shopex.customer.ui.ShoppingCartFragment;
-import com.jignesh.shopex.shopkeeper.ui.ShopkeeperAccountFragment;
-
-import java.util.zip.Inflater;
 
 public class CustomerActivity extends AppCompatActivity {
 
@@ -33,6 +27,7 @@ public class CustomerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_customer);
 
         try {
@@ -66,6 +61,7 @@ public class CustomerActivity extends AppCompatActivity {
             Log.d("bata", e.toString());
             Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
         }
+
     }
 
     public void replaceFragment(Fragment fragment){

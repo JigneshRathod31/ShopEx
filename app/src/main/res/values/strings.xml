@@ -12,7 +12,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- user login Activity -->
-
     <string name="user_login_sk_txt">Shop Keeper</string>
     <string name="user_login_cust_txt">Customer</string>
     <string name="user_login_warn_txt">Are you a customer / shop keeper?</string>
@@ -22,6 +21,8 @@
     <string name="frg_csm_acc_email_hint">Email</string>
     <string name="frg_csm_acc_mob_hint">Mobile no</string>
     <string name="frg_csm_acc_add_hint">Address</string>
+    <string name="frg_csm_acc_pass_hint">Password</string>
+    <string name="frg_csm_acc_cfm_pass_hint">Confirm Password</string>
     <string name="frg_csm_acc_save_btn">Save</string>
 
     <!-- shopkeeper account fragment -->
