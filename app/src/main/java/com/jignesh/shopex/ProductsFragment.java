@@ -101,7 +101,7 @@ public class ProductsFragment extends Fragment {
 
             alStoreProductModel = new ArrayList<>();
             rvProducts.setLayoutManager(new GridLayoutManager(getContext(), 2));
-            storeProductAdapter = new StoreProductAdapter(alStoreProductModel, getContext(), mShopName);
+            storeProductAdapter = new StoreProductAdapter(alStoreProductModel, getContext(), mShopName, mCanAdd);
             rvProducts.setAdapter(storeProductAdapter);
 
             retrieveProductDataFromFirebase();
@@ -175,6 +175,11 @@ public class ProductsFragment extends Fragment {
                                         productModel.setProductPrice(productDetails.get("product_price").toString());
                                         productModel.setProductQuantity(productDetails.get("product_quantity").toString());
                                         productModel.setProductOnboard(productDetails.get("product_onboard").toString());
+                                        productModel.setShopName(productDetails.get("shop_name").toString());
+
+                                        if (productDetails.get("review_rate") != null){
+                                            productModel.setReviewRate(productDetails.get("review_rate").toString());
+                                        }
 
                                         alStoreProductModel.add(productModel);
                                         storeProductAdapter.notifyDataSetChanged();

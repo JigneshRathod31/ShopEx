@@ -55,13 +55,19 @@ public class ShopkeeperStoreFragment extends Fragment {
 
     FirebaseFirestore db;
     // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM1 = "productName";
+    private static final String ARG_PARAM2 = "productImage";
+    private static final String ARG_PARAM3 = "productDescription";
+    private static final String ARG_PARAM4 = "productPrice";
+    private static final String ARG_PARAM5 = "productQuantity";
+    private static final String ARG_PARAM6 = "productOnboard";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String argProductName;
+    private String argProductImage;
+    private String argProductDescription;
+    private String argProductPrice;
+    private String argProductQuantity;
+    private String argProductOnboard;
 
     public ShopkeeperStoreFragment() {
         // Required empty public constructor
@@ -76,11 +82,15 @@ public class ShopkeeperStoreFragment extends Fragment {
      * @return A new instance of fragment ShopkeeperStoreFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ShopkeeperStoreFragment newInstance(String param1, String param2) {
+    public static ShopkeeperStoreFragment newInstance(String param1, String param2, String param3, String param4, String param5, String param6) {
         ShopkeeperStoreFragment fragment = new ShopkeeperStoreFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM3, param3);
+        args.putString(ARG_PARAM4, param4);
+        args.putString(ARG_PARAM5, param5);
+        args.putString(ARG_PARAM6, param6);
         fragment.setArguments(args);
         return fragment;
     }
@@ -89,8 +99,12 @@ public class ShopkeeperStoreFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            argProductName = getArguments().getString(ARG_PARAM1);
+            argProductImage = getArguments().getString(ARG_PARAM2);
+            argProductDescription = getArguments().getString(ARG_PARAM3);
+            argProductPrice = getArguments().getString(ARG_PARAM4);
+            argProductQuantity = getArguments().getString(ARG_PARAM5);
+            argProductOnboard = getArguments().getString(ARG_PARAM6);
         }
     }
 
@@ -102,58 +116,57 @@ public class ShopkeeperStoreFragment extends Fragment {
 
         try {
 
-        db = FirebaseFirestore.getInstance();
+            db = FirebaseFirestore.getInstance();
 
-        ivAddProductImage = view.findViewById(R.id.iv_add_product_image);
-        ivGetProductImage = view.findViewById(R.id.iv_get_product_image);
+            ivAddProductImage = view.findViewById(R.id.iv_add_product_image);
+            ivGetProductImage = view.findViewById(R.id.iv_get_product_image);
 
-        etAddProductName = view.findViewById(R.id.et_add_product_name);
-        etAddProductDescription = view.findViewById(R.id.et_add_product_description);
-        etAddProductPrice = view.findViewById(R.id.et_add_product_price);
-        etAddProductQuantity = view.findViewById(R.id.et_add_product_quantity);
+            etAddProductName = view.findViewById(R.id.et_add_product_name);
+            etAddProductDescription = view.findViewById(R.id.et_add_product_description);
+            etAddProductPrice = view.findViewById(R.id.et_add_product_price);
+            etAddProductQuantity = view.findViewById(R.id.et_add_product_quantity);
 
-        btnAddProduct = view.findViewById(R.id.btn_add_product);
-        progressBar = view.findViewById(R.id.progress_bar);
+            btnAddProduct = view.findViewById(R.id.btn_add_product);
+            progressBar = view.findViewById(R.id.progress_bar);
 
-        ivGetProductImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent inChooseImg = new Intent(Intent.ACTION_PICK);
-                inChooseImg.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(inChooseImg, GALLERY_REQ_CODE);
-            }
-        });
-
-        btnAddProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    btnAddProduct.setEnabled(false);
-                    progressBar.setVisibility(View.VISIBLE);
-
-                    uploadProductImageOnStorage();
-
-                    addProductOnFirebase();
-
-                    progressBar.setVisibility(View.GONE);
-
-                    Fragment productFragment = new ProductsFragment();
-                    Bundle args = new Bundle();
-                    args.putString("shopName", "pnp");
-                    args.putString("canAdd", "true");
-                    productFragment.setArguments(args);
-
-                    FragmentManager fm = ((FragmentActivity) view.getContext()).getSupportFragmentManager();
-                    FragmentTransaction ft = fm.beginTransaction();
-                    ft.replace(R.id.s_frameLayout, productFragment);
-                    ft.commit();
-
-                } catch (Exception e) {
-                    Log.d("dalle", e.toString());
-//                    Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+            ivGetProductImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent inChooseImg = new Intent(Intent.ACTION_PICK);
+                    inChooseImg.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(inChooseImg, GALLERY_REQ_CODE);
                 }
-            }
-        });
+            });
+
+            btnAddProduct.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    try {
+                        btnAddProduct.setEnabled(false);
+                        progressBar.setVisibility(View.VISIBLE);
+
+                        uploadProductImageOnStorage();
+
+                        addProductOnFirebase();
+
+                        progressBar.setVisibility(View.GONE);
+
+                        Fragment productFragment = new ProductsFragment();
+                        Bundle args = new Bundle();
+                        args.putString("shopName", "pnp");
+                        args.putString("canAdd", "true");
+                        productFragment.setArguments(args);
+
+                        FragmentManager fm = ((FragmentActivity) view.getContext()).getSupportFragmentManager();
+                        FragmentTransaction ft = fm.beginTransaction();
+                        ft.replace(R.id.s_frameLayout, productFragment);
+                        ft.commit();
+
+                    } catch (Exception e) {
+                        Log.d("dalle", e.toString());
+                    }
+                }
+            });
         } catch (Exception e) {
             Log.d("dalle", e.toString());
         }
@@ -235,6 +248,7 @@ public class ShopkeeperStoreFragment extends Fragment {
             String productPrice = etAddProductPrice.getText().toString().trim();
             String productQty = etAddProductQuantity.getText().toString().trim();
             String productOnboard = "true";
+            String shopName = "pnp";
 
             HashMap<String, String> productDetails = new HashMap<>();
             productDetails.put("product_image", productImage);
@@ -243,6 +257,7 @@ public class ShopkeeperStoreFragment extends Fragment {
             productDetails.put("product_price", productPrice);
             productDetails.put("product_quantity", productQty);
             productDetails.put("product_onboard", productOnboard);
+            productDetails.put("shop_name", shopName);
 
             db.collection("gnr")
                     .document("pnp")

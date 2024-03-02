@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    android:background="@color/light_bg_color"
+    tools:context=".shopkeeper.ui.ShopkeeperOrderRequestsFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_order_requests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</FrameLayout>

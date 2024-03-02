@@ -26,6 +26,7 @@ import com.jignesh.shopex.adapters.CustomerStoreAdapter;
 import com.jignesh.shopex.models.ProductModel;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -114,12 +115,40 @@ public class ShoppingCartFragment extends Fragment {
     void addProductsToMyOrderOnFirebase(int i){
         if (i >= 0){
             HashMap<String, String> orderDetails = new HashMap<>();
-            orderDetails.put("order_date", "01/03/2024");
-            orderDetails.put("order_quantity", "4");
+            orderDetails.put("order_date", "02/03/2024");
+            orderDetails.put("order_quantity", alCustomerCartProductModel.get(i).getOrderQuantity());
             orderDetails.put("product_name", alCustomerCartProductModel.get(i).getProductName());
             orderDetails.put("product_description", alCustomerCartProductModel.get(i).getProductDescription());
             orderDetails.put("product_image", alCustomerCartProductModel.get(i).getProductImage());
             orderDetails.put("product_price", alCustomerCartProductModel.get(i).getProductPrice());
+            orderDetails.put("shop_name", alCustomerCartProductModel.get(i).getShopName());
+            orderDetails.put("delivery_status", "pending");
+
+            HashMap<String, String> requestOrderDetails = new HashMap<>();
+            requestOrderDetails.put("customer_address", "GEC Gandhinagar, Sector 28.");
+            requestOrderDetails.put("customer_name", "JK");
+            requestOrderDetails.put("delivery_status", "pending");
+            requestOrderDetails.put("product_name", alCustomerCartProductModel.get(i).getProductName());
+            requestOrderDetails.put("product_quantity", alCustomerCartProductModel.get(i).getOrderQuantity());
+
+            Calendar calendar = Calendar.getInstance();
+
+            db.collection("gnr")
+                            .document("pnp")
+                            .collection("OrderRequests")
+                            .document(String.valueOf(calendar.getTimeInMillis()))
+                            .set(requestOrderDetails)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()){
+                                        Log.d("success", "Request generated successfully");
+                                    }else {
+                                        Log.d("error", task.getException().toString());
+                                        Toast.makeText(getContext(), task.getException().toString(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
 
             db.collection("gnr")
                     .document("customer$")
@@ -225,6 +254,8 @@ public class ShoppingCartFragment extends Fragment {
                                         productModel.setProductPrice(productDetails.get("product_price").toString());
                                         productModel.setProductQuantity(productDetails.get("product_quantity").toString());
                                         productModel.setProductOnboard(productDetails.get("product_onboard").toString());
+                                        productModel.setOrderQuantity(productDetails.get("order_quantity").toString());
+                                        productModel.setShopName(productDetails.get("shop_name").toString());
                                         
                                         alCustomerCartProductModel.add(productModel);
                                         customerCartProductAdapter.notifyDataSetChanged();

@@ -3,6 +3,7 @@ package com.jignesh.shopex.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.media.Image;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +15,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.jignesh.shopex.R;
 import com.jignesh.shopex.models.ProductModel;
 
@@ -32,12 +38,15 @@ public class CustomerCartProductAdapter extends RecyclerView.Adapter<CustomerCar
     Context context;
 
     FirebaseFirestore db;
+    FirebaseStorage firebaseStorage;
+    StorageReference storageRef;
 
     public CustomerCartProductAdapter(ArrayList<ProductModel> alCustomerCartProductModel, Context context) {
         this.alCustomerCartProductModel = alCustomerCartProductModel;
         this.context = context;
 
         db = FirebaseFirestore.getInstance();
+        firebaseStorage = FirebaseStorage.getInstance();
     }
 
     @NonNull
@@ -50,10 +59,12 @@ public class CustomerCartProductAdapter extends RecyclerView.Adapter<CustomerCar
 
     @Override
     public void onBindViewHolder(@NonNull CustomerCartProductAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.ivCartProductImage.setImageResource(R.mipmap.ic_launcher_foreground);
+        loadProductImage(alCustomerCartProductModel.get(position).getProductImage(), holder);
 
         holder.tvCartProductName.setText(alCustomerCartProductModel.get(position).getProductName());
-        holder.tvCartProductPrice.setText(alCustomerCartProductModel.get(position).getProductPrice());
+        holder.tvCartShopName.setText(alCustomerCartProductModel.get(position).getShopName());
+        holder.tvCartProductPrice.setText("₹"+alCustomerCartProductModel.get(position).getProductPrice());
+        holder.tvCartProductCount.setText(alCustomerCartProductModel.get(position).getOrderQuantity());
 
         holder.ivDecreaseCartProduct.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +110,24 @@ public class CustomerCartProductAdapter extends RecyclerView.Adapter<CustomerCar
         return alCustomerCartProductModel.size();
     }
 
+    void loadProductImage(String productImage, @NonNull CustomerCartProductAdapter.ViewHolder holder){
+        storageRef = firebaseStorage.getReference();
+        storageRef.child(productImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+
+                Glide.with(context)
+                        .load(uri)
+                        .into(holder.ivCartProductImage);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+            }
+        });
+    }
+
     void deleteCartProductFromFirebase(String product){
         db.collection("gnr")
                 .document("customer$")
@@ -122,7 +151,7 @@ public class CustomerCartProductAdapter extends RecyclerView.Adapter<CustomerCar
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView ivCartProductImage, ivDecreaseCartProduct, ivIncreaseCartProduct, ivRemoveCartProduct;
-        TextView tvCartProductName, tvCartProductPrice, tvCartProductCount;
+        TextView tvCartProductName, tvCartShopName, tvCartProductPrice, tvCartProductCount;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -131,10 +160,11 @@ public class CustomerCartProductAdapter extends RecyclerView.Adapter<CustomerCar
             ivDecreaseCartProduct = itemView.findViewById(R.id.iv_decrease_cart_product);
             ivIncreaseCartProduct = itemView.findViewById(R.id.iv_increase_cart_product);
             ivRemoveCartProduct = itemView.findViewById(R.id.iv_remove_cart_product);
+
             tvCartProductName = itemView.findViewById(R.id.tv_cart_product_name);
+            tvCartShopName = itemView.findViewById(R.id.tv_cart_shop_name);
             tvCartProductPrice = itemView.findViewById(R.id.tv_cart_product_price);
             tvCartProductCount = itemView.findViewById(R.id.tv_cart_product_count);
-
         }
     }
 }

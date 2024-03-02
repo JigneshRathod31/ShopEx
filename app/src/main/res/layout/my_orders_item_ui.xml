@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="12dp"
-        android:weightSum="12"
+        android:weightSum="13"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -21,9 +21,9 @@
             android:id="@+id/iv_order_product_image"
             android:layout_width="0dp"
             android:layout_height="80dp"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:background="@drawable/rounded_image"
-            android:src="@drawable/ic_launcher_background" />
+            android:src="@mipmap/ic_launcher_foreground" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -39,6 +39,14 @@
                 android:text="Product Title"
                 android:textSize="18sp"
                 android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_order_shop_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Patnagar Panipuri"
+                android:textSize="17sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -78,8 +86,7 @@
                 android:id="@+id/iv_product_delivered"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@drawable/ic_baseline_check_circle_24"
-                app:tint="@color/green" />
+                android:src="@drawable/ic_baseline_check_circle_24" />
 
             <TextView
                 android:id="@+id/tv_order_product_price"
@@ -91,6 +98,14 @@
                 android:textStyle="bold" />
 
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_feedback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:src="@drawable/ic_baseline_feedback_24" />
 
     </LinearLayout>
 

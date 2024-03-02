@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -20,6 +21,7 @@ import com.jignesh.shopex.customer.ui.CustomerHomeFragment;
 import com.jignesh.shopex.customer.ui.CustomerMyOrdersFragment;
 import com.jignesh.shopex.shopkeeper.ui.ShopkeeperAccountFragment;
 import com.jignesh.shopex.shopkeeper.ui.ShopkeeperDashboardFragment;
+import com.jignesh.shopex.shopkeeper.ui.ShopkeeperOrderRequestsFragment;
 import com.jignesh.shopex.shopkeeper.ui.ShopkeeperStoreFragment;
 import com.jignesh.shopex.utils.SendNotification;
 
@@ -61,6 +63,21 @@ public class ShopkeeperActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.shopkeeper_order_request_menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.order_request_menu_item){
+            replaceFragment(new ShopkeeperOrderRequestsFragment());
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void replaceFragment(Fragment fragment){
