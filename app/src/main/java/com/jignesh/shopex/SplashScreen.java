@@ -35,7 +35,7 @@ public class SplashScreen extends AppCompatActivity {
             public void onAnimationStart(Animation animation) {}
             @Override
             public void onAnimationEnd(Animation animation) {
-//                GenerateInvoicePDF.generateInvoicePDF(getApplicationContext());
+//                GenerateInvoicePDF.generateInvoicePDF(getApplicationContext(), "Invoice.pdf", "Patnagar Panipuri", "Jignesh Rathod");
                 ivLogo.setVisibility(View.INVISIBLE);
                 ivShopEx.setVisibility(View.VISIBLE);
                 new Handler().postDelayed(new Runnable() {

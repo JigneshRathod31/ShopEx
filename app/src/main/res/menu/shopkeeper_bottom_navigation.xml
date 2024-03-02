@@ -11,7 +11,7 @@
         android:id="@+id/s_store"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Store"
+        android:title="My Store"
         android:icon="@drawable/ic_store"/>
     <item
         android:id="@+id/s_account"

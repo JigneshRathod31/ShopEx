@@ -37,6 +37,7 @@ public class CustomerActivity extends AppCompatActivity {
 
         try {
             customerBNV = findViewById(R.id.customer_bottomNavigationView);
+            setTitle("Stores");
             replaceFragment(new CustomerHomeFragment());
 
             customerBNV.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -46,12 +47,15 @@ public class CustomerActivity extends AppCompatActivity {
 
                     switch (item.getItemId()){
                         case R.id.c_home:
+                            setTitle("Stores");
                             replaceFragment(new CustomerHomeFragment());
                             break;
                         case R.id.c_my_orders:
+                            setTitle("My Orders");
                             replaceFragment(new CustomerMyOrdersFragment());
                             break;
                         case R.id.c_account:
+                            setTitle("Account");
                             replaceFragment(new CustomerAccountFragment());
                             break;
                     }

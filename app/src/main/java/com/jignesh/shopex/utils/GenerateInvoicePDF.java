@@ -24,16 +24,17 @@ import java.util.List;
 public class GenerateInvoicePDF {
 
     static List<InvoiceItem> invItem;
-    public static void generateInvoicePDF(Context context){
+    public static void generateInvoicePDF(Context context,String fileNameWithPDFExtension, String shopkeeperName, String customerName){
         invItem = new ArrayList<InvoiceItem>();
         try{
-            String filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath().toString()+"/Invoice.pdf";
+            String filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath().toString()+"/"+fileNameWithPDFExtension;
             Document doc = new Document();
 
             PdfWriter.getInstance(doc, new FileOutputStream(filePath));
 
             doc.open();
-            Paragraph para = new Paragraph("\n\nInvoice\n\n");
+            Paragraph para = new Paragraph("\n\nInvoice\n\nSeller: "+shopkeeperName+"\nSold to: "+customerName+"\n\n");
+
             para.setAlignment(Element.ALIGN_CENTER);
 
             doc.add(para);
@@ -65,8 +66,6 @@ public class GenerateInvoicePDF {
 
             Double total, grandTotal=Double.parseDouble("0");
 
-
-
             cell.setBackgroundColor(BaseColor.WHITE);
             for(InvoiceItem item : invItem){
                 total = (item.itemPrice*item.itemQuantity);
@@ -94,7 +93,7 @@ public class GenerateInvoicePDF {
             doc.add(tb);
             doc.close();
 
-            Toast.makeText(context, "PDF Generated Successfully!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "PDF Generated Successfully at Downloads Folder as 'Invoice.pdf'!", Toast.LENGTH_SHORT).show();
 
         } catch (Exception e) {
             Toast.makeText(context, "Something went wrong!", Toast.LENGTH_SHORT).show();

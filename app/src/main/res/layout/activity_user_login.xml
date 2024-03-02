@@ -23,7 +23,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/lottie_anim"
         android:layout_alignStart="@id/innerLYT"
+        android:layout_alignEnd="@id/innerLYT"
         android:text="@string/user_login_warn_txt"
+        android:textAlignment="center"
         android:textSize="18sp"
         android:textColor="@color/main_color"/>
 
@@ -36,6 +38,7 @@
         android:layout_alignEnd="@id/lottie_anim"
         android:layout_marginEnd="0dp"
         android:layout_marginTop="25dp"
+        android:gravity="center"
         android:background="@color/transparent">
 
         <Button

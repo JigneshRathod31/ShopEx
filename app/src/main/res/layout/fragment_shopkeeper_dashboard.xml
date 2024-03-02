@@ -19,7 +19,6 @@
             android:orientation="horizontal"
             android:weightSum="2"
             >
-
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -490,7 +489,6 @@
             </LinearLayout>
 
         </HorizontalScrollView>
-
 
     </LinearLayout>
 

@@ -9,7 +9,9 @@ import androidx.fragment.app.FragmentTransaction;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -33,8 +35,8 @@ public class ShopkeeperActivity extends AppCompatActivity {
         setContentView(R.layout.activity_shopkeeper);
 
         shopkeeperBNV = findViewById(R.id.shopkeeper_bottomNavigationView);
+        setTitle("Dashboard");
         replaceFragment(new ShopkeeperDashboardFragment());
-
         shopkeeperBNV.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @SuppressLint("NonConstantResourceId")
             @Override
@@ -51,9 +53,11 @@ public class ShopkeeperActivity extends AppCompatActivity {
                         args.putString("canAdd", "true");
                         productFragment.setArguments(args);
 
+                        setTitle("My Store");
                         replaceFragment(productFragment);
                         break;
                     case R.id.s_account:
+                        setTitle("Account");
                         replaceFragment(new ShopkeeperAccountFragment());
                         break;
                 }
