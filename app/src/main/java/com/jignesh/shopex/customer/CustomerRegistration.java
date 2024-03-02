@@ -73,7 +73,7 @@ public class CustomerRegistration extends AppCompatActivity {
                     db.collection(ROOT).document(CUS_DOC).collection(CUS_COLL).document(CUSTOMER).set(customerData).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            Toast.makeText(CustomerRegistration.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Data registration successful", Toast.LENGTH_SHORT).show();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override

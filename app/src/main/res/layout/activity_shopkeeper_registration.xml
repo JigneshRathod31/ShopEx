@@ -6,11 +6,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".RegistrationActivity">
+    tools:context=".shopkeeper.ShopkeeperRegistration">
 
     <ImageView
         android:layout_width="140dp"
         android:layout_height="140dp"
+        android:layout_marginTop="-32dp"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/registration" />
 
@@ -18,32 +19,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="-4dp"
+        android:layout_marginTop="-16dp"
         android:text="Register"
         android:textColor="@color/main_color"
-        android:textSize="48sp"
+        android:textSize="32sp"
         android:textStyle="bold" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/skp_reg_usr_name_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/rounded_edittext"
-                android:drawableStart="@drawable/ic_user"
-                android:drawablePadding="8dp"
-                android:hint="@string/reg_usr_name_hint"
-                android:inputType="text"
-                android:padding="12dp" />
 
             <EditText
                 android:id="@+id/skp_reg_email_et"
@@ -55,7 +45,8 @@
                 android:drawablePadding="8dp"
                 android:hint="@string/reg_lgn_email_hint"
                 android:inputType="textEmailAddress"
-                android:padding="12dp" />
+                android:padding="12dp"
+                android:text="sujla@gmail.com"/>
 
             <EditText
                 android:id="@+id/skp_reg_mob_et"
@@ -67,7 +58,8 @@
                 android:drawablePadding="8dp"
                 android:hint="@string/reg_mob_hint"
                 android:inputType="number"
-                android:padding="12dp" />
+                android:padding="12dp"
+                android:text="9999999999"/>
 
             <EditText
                 android:id="@+id/skp_reg_add_et"
@@ -79,7 +71,8 @@
                 android:drawablePadding="8dp"
                 android:hint="@string/reg_add_hint"
                 android:inputType="textPostalAddress"
-                android:padding="12dp" />
+                android:padding="12dp"
+                android:text="123 fajsjkadshfkjask"/>
 
             <EditText
                 android:id="@+id/skp_reg_shop_name_et"
@@ -91,7 +84,8 @@
                 android:drawablePadding="8dp"
                 android:hint="@string/reg_shop_name_hint"
                 android:inputType="text"
-                android:padding="12dp" />
+                android:padding="12dp"
+                android:text="fjask lkjl"/>
 
             <EditText
                 android:id="@+id/skp_reg_shop_owner_et"
@@ -103,7 +97,8 @@
                 android:drawablePadding="8dp"
                 android:hint="@string/reg_shop_owner_hint"
                 android:inputType="text"
-                android:padding="12dp" />
+                android:padding="12dp"
+                android:text="fjasdjkljasl"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/skp_reg_ctg_et"
@@ -124,7 +119,8 @@
                     android:drawablePadding="8dp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:textSize="16sp"
-                    android:hint="@string/reg_ctg_hint" />
+                    android:hint="@string/reg_ctg_hint"
+                    android:text="Xyz xyz"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -138,7 +134,8 @@
                 android:drawablePadding="8dp"
                 android:hint="@string/reg_lgn_pass_hint"
                 android:inputType="textPassword"
-                android:padding="12dp" />
+                android:padding="12dp"
+                android:text="0"/>
 
             <EditText
                 android:id="@+id/skp_reg_cfm_pass_et"
@@ -150,7 +147,8 @@
                 android:drawablePadding="8dp"
                 android:hint="@string/reg_cfm_pass_hint"
                 android:inputType="textPassword"
-                android:padding="12dp" />
+                android:padding="12dp"
+                android:text="0"/>
 
             <TextView
                 android:layout_width="match_parent"
